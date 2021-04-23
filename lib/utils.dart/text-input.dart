@@ -5,6 +5,7 @@ class TextInput extends StatefulWidget {
   final TextEditingController controller;
   final TextInputType keyboardType;
   final Color textColor;
+  final double borderWidth;
   final String hintText;
   final String Function(String) validator;
   final VoidCallback iconAction;
@@ -29,6 +30,7 @@ class TextInput extends StatefulWidget {
       this.labelTextColor,
       this.prefixWidget,
       this.icon,
+      this.borderWidth,
       this.borderColor,
       this.focusedBorderColor,
       this.isPassword,
@@ -58,6 +60,7 @@ class _TextInputState extends State<TextInput> {
               labelStyle: TextStyle(
                   color: this.widget.labelTextColor,
                   fontSize: 12,
+                  fontFamily: 'BasisGrotesquePro',
                   letterSpacing: 0.0),
               hintText: this.widget.hintText ?? null,
               isDense: true,
@@ -82,6 +85,7 @@ class _TextInputState extends State<TextInput> {
                   null,
               enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
+                          width: this.widget.borderWidth ?? 1.0,
                           color: this.widget.borderColor ?? Colors.black)) ??
                   null,
               focusedBorder: UnderlineInputBorder(

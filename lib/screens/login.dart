@@ -64,9 +64,7 @@ class LoginScreen extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     // ignore: deprecated_member_use
                     child: FlatButton(
-                        onPressed: () {
-                          Get.toNamed('/forgot-password');
-                        },
+                        onPressed: () => null,
                         child: Text("Forgot Password?",
                             style:
                                 TextStyle(color: Colors.white, fontSize: 12)))),
@@ -90,12 +88,15 @@ class LoginScreen extends StatelessWidget {
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text(
-                          "New User? Create a new account",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.normal,
-                              fontSize: 12),
+                        InkWell(
+                          onTap: () => Get.toNamed('/register'),
+                          child: Text(
+                            "New User? Create a new account",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.normal,
+                                fontSize: 12),
+                          ),
                         ),
                       ]),
                 ),
