@@ -21,6 +21,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+        theme: ThemeData(
+            fontFamily: 'BasisGrotesquePro', primaryColor: Colors.white),
         debugShowCheckedModeBanner: false,
         title: 'HaggleX',
         initialRoute: '/splash',

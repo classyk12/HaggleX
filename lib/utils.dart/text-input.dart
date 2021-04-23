@@ -57,7 +57,7 @@ class _TextInputState extends State<TextInput> {
               labelText: this.widget.labelText ?? null,
               labelStyle: TextStyle(
                   color: this.widget.labelTextColor,
-                  fontSize: this.widget.labelFontSize,
+                  fontSize: 12,
                   letterSpacing: 0.0),
               hintText: this.widget.hintText ?? null,
               isDense: true,

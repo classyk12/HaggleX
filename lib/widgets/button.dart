@@ -29,14 +29,17 @@ class Button extends StatelessWidget {
         // splashColor: Colors.white.withOpacity(0.2),
         // elevation: 8,
         onPressed: onPressed,
-        child: Text(
-          text,
-          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Text(
+            text,
+            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+          ),
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(5.0),
         ),
-        padding: EdgeInsets.only(left: 0, right: 0, top: 13, bottom: 13),
+        // padding: EdgeInsets.only(left: 0, right: 0, top: 13, bottom: 13),
       ),
     );
   }
