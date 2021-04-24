@@ -1,9 +1,7 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haggle_clone/controllers/login-controller.dart';
-import 'package:haggle_clone/helpers/connection-checker.dart';
 import 'package:haggle_clone/utils.dart/margin.dart';
 import 'package:haggle_clone/utils.dart/text-input.dart';
 import 'package:haggle_clone/utils.dart/themes.dart';
@@ -15,133 +13,53 @@ class SetUpCompleteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: Colors.white,
-        child: Form(
-          child: ListView(
-            children: <Widget>[
-              YMargin(40),
-              Image.asset('assets/images/logo1.png',
-                  width: Get.width, height: Get.height * 0.3),
-              TextInput(
-                controller: _loginController.usernameController,
-                keyboardType: TextInputType.emailAddress,
-                borderColor: Colors.grey,
-                focusedBorderColor: Colors.grey,
-                labelText: "Email",
-                isPassword: false,
-                textColor: Colors.black,
-                labelTextColor: Colors.grey[600],
+        body: Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/images/splash-bg.png"),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(child: Text('')),
+              Image.asset(
+                'assets/images/setup-complete.png',
+                height: 60,
+                width: 60,
               ),
-              GetBuilder<LoginController>(
-                  builder: (value) => TextInput(
-                      icon: Icons.remove_red_eye,
-                      //iconAction: () => value.showPassword(),
-                      controller: _loginController.passwordController,
-                      keyboardType: TextInputType.text,
-                      borderColor: Colors.grey,
-                      focusedBorderColor: Colors.grey,
-                      labelText: "Password",
-                      isPassword: value.isPassword,
-                      textColor: Colors.black,
-                      labelTextColor: Colors.grey[600])),
+              YMargin(10),
+              Text("Setup Complete",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold)),
+              YMargin(20),
+              Text("Thank you for setting up your HaggleX account",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 10,
+                      fontWeight: FontWeight.normal)),
+              //  YMargin(15),
+              Spacer(),
               Align(
-                  alignment: Alignment.centerRight,
-                  // ignore: deprecated_member_use
-                  child: FlatButton(
-                      onPressed: () {
-                        Get.toNamed('/forgot-password');
-                      },
-                      child: Text("Forgot password?",
-                          style: TextStyle(color: Colors.black87)))),
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 8.0, bottom: 10.0, right: 20, left: 20.0),
+                alignment: Alignment.bottomCenter,
                 child: Button(
-                    text: 'Sign In',
-                    onPressed: () {
-                      InternetHelper.checkInternet(
-                          function: () => _loginController.login());
-                    },
-                    width: Get.width * 0.8,
-                    height: 45,
-                    color: onboardingButtonColor),
+                    text: 'START EXPLORING',
+                    onPressed: () => Get.offAllNamed('/dashboard'),
+                    height: Get.height * 0.07,
+                    color: buttonYellow),
               ),
-              YMargin(15),
-              Center(
-                  child: Text('Or sign in with',
-                      style: TextStyle(color: Colors.black, fontSize: 16))),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      InkWell(
-                        onTap: () {
-                          InternetHelper.checkInternet(function: () => null);
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 12.0, left: 10),
-                          child: Image.asset(
-                            'assets/images/logo1.png',
-                            height: 40,
-                            width: 40,
-                          ),
-                        ),
-                      ),
-                      GetPlatform.isIOS
-                          ? Padding(
-                              padding:
-                                  const EdgeInsets.only(right: 12.0, left: 10),
-                              child: Image.asset(
-                                'assets/images/logo1.png',
-                                height: 45,
-                                width: 45,
-                              ),
-                            )
-                          : Container(width: Get.width * 0.05),
-                      InkWell(
-                        onTap: () {
-                          InternetHelper.checkInternet(function: () => null);
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 12.0, left: 5),
-                          child: Image.asset(
-                            'assets/images/logo1.png',
-                            height: 60,
-                            width: 60,
-                          ),
-                        ),
-                      ),
-                    ]),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 12.0, top: 10),
-                child: Center(
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          "Don't have an account?",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: 16),
-                        ),
-                        InkWell(
-                            onTap: () {
-                              Get.toNamed('/signup');
-                            },
-                            child: Text(' Sign Up',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: onboardingButtonColor,
-                                    fontWeight: FontWeight.bold)))
-                      ]),
-                ),
-              ),
+              YMargin(30)
             ],
           ),
         ),
       ),
-    );
+    ));
   }
 }

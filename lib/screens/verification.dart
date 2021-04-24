@@ -1,12 +1,9 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haggle_clone/controllers/login-controller.dart';
-import 'package:haggle_clone/helpers/connection-checker.dart';
 import 'package:haggle_clone/utils.dart/margin.dart';
 import 'package:haggle_clone/utils.dart/text-input.dart';
-import 'package:haggle_clone/utils.dart/themes.dart';
 import 'package:haggle_clone/widgets/button.dart';
 
 class VerificationScreen extends StatelessWidget {
@@ -15,133 +12,139 @@ class VerificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: Colors.white,
-        child: Form(
-          child: ListView(
-            children: <Widget>[
-              YMargin(40),
-              Image.asset('assets/images/loginImage.png',
-                  width: Get.width, height: Get.height * 0.3),
-              TextInput(
-                controller: _loginController.usernameController,
-                keyboardType: TextInputType.emailAddress,
-                borderColor: Colors.grey,
-                focusedBorderColor: Colors.grey,
-                labelText: "Email",
-                isPassword: false,
-                textColor: Colors.black,
-                labelTextColor: Colors.grey[600],
-              ),
-              GetBuilder<LoginController>(
-                  builder: (value) => TextInput(
-                      icon: Icons.remove_red_eye,
-                      //  iconAction: () => value.showPassword(),
-                      controller: _loginController.passwordController,
-                      keyboardType: TextInputType.text,
-                      borderColor: Colors.grey,
-                      focusedBorderColor: Colors.grey,
-                      labelText: "Password",
-                      isPassword: value.isPassword,
-                      textColor: Colors.black,
-                      labelTextColor: Colors.grey[600])),
-              Align(
-                  alignment: Alignment.centerRight,
-                  // ignore: deprecated_member_use
-                  child: FlatButton(
-                      onPressed: () {
-                        Get.toNamed('/forgot-password');
-                      },
-                      child: Text("Forgot password?",
-                          style: TextStyle(color: Colors.black87)))),
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 8.0, bottom: 10.0, right: 20, left: 20.0),
-                child: Button(
-                    text: 'Sign In',
-                    onPressed: () {
-                      InternetHelper.checkInternet(
-                          function: () => _loginController.login());
-                    },
-                    width: Get.width * 0.8,
+        body: Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/images/splash-bg.png"),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 0),
+        child: ListView(
+          children: <Widget>[
+            YMargin(Get.height * 0.05),
+            InkWell(
+              onTap: () => Get.back(),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 12.0),
+                  child: Image.asset(
+                    'assets/images/back-icon.png',
                     height: 45,
-                    color: onboardingButtonColor),
+                    width: 45,
+                  ),
+                ),
               ),
-              YMargin(15),
-              Center(
-                  child: Text('Or sign in with',
-                      style: TextStyle(color: Colors.black, fontSize: 16))),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      InkWell(
-                        onTap: () {
-                          InternetHelper.checkInternet(function: () => null);
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 12.0, left: 10),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 30, left: 15, top: 30),
+              child: Text("Verify your account!",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 23,
+                      fontWeight: FontWeight.bold)),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 15.0, bottom: 50),
+              child: Card(
+                margin: EdgeInsets.only(bottom: 20),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                elevation: 10,
+                color: Colors.white,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.only(left: 12.0, right: 10, bottom: 10),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 30.0),
                           child: Image.asset(
-                            'assets/images/facebooklogo.png',
-                            height: 40,
-                            width: 40,
-                          ),
-                        ),
-                      ),
-                      GetPlatform.isIOS
-                          ? Padding(
-                              padding:
-                                  const EdgeInsets.only(right: 12.0, left: 10),
-                              child: Image.asset(
-                                'assets/images/applelogo.png',
-                                height: 45,
-                                width: 45,
-                              ),
-                            )
-                          : Container(width: Get.width * 0.05),
-                      InkWell(
-                        onTap: () {
-                          InternetHelper.checkInternet(function: () => null);
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 12.0, left: 5),
-                          child: Image.asset(
-                            'assets/images/googlelogo.jpeg',
+                            "assets/images/completed.png",
                             height: 60,
                             width: 60,
                           ),
                         ),
-                      ),
-                    ]),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 12.0, top: 10),
-                child: Center(
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          "Don't have an account?",
-                          style: TextStyle(
-                              fontWeight: FontWeight.w500, fontSize: 16),
-                        ),
-                        InkWell(
-                            onTap: () {
-                              Get.toNamed('/signup');
-                            },
-                            child: Text(' Sign Up',
+                        Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                left: 40.0, bottom: 18, top: 40, right: 40),
+                            child: Text(
+                                "We just sent a verification code to your email. Please enter the code",
                                 style: TextStyle(
-                                    fontSize: 16,
-                                    color: onboardingButtonColor,
-                                    fontWeight: FontWeight.bold)))
+                                    fontWeight: FontWeight.normal,
+                                    fontSize: 12)),
+                          ),
+                        ),
+                        YMargin(20),
+                        GetBuilder<LoginController>(
+                            builder: (value) => TextInput(
+                                // icon: Icons.remove_red_eye,
+                                //  iconAction: () => value.showPassword(),
+                                controller: _loginController.passwordController,
+                                keyboardType: TextInputType.text,
+                                borderColor: Colors.black,
+                                focusedBorderColor: Colors.black,
+                                labelText: "Verification code",
+                                isPassword: false,
+                                textColor: Colors.black,
+                                labelTextColor: Colors.black)),
+                        YMargin(25),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 20.0, right: 15, bottom: 25),
+                          child: Button(
+                            buttonColor: Colors.white,
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              gradient: LinearGradient(
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                                colors: [
+                                  Color(0xFF432B7B),
+                                  Color(0xFF6A4BBC),
+                                ],
+                              ),
+                            ),
+                            text: 'VERIFY ME',
+
+                            onPressed: () {
+                              Get.offAllNamed('/setup-complete');
+                            },
+                            //width: Get.width * 0.8,
+                            height: Get.height * 0.07,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 10.0, bottom: 40, left: 15),
+                          child: Text('The code will expire in 10 minutes',
+                              style: TextStyle(fontSize: 11)),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 10.0, bottom: 40, left: 15),
+                          child: Text('Resend Code',
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  decorationThickness: 2,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold)),
+                        ),
+                        YMargin(30)
                       ]),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
-    );
+    ));
   }
 }
