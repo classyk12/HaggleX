@@ -72,14 +72,30 @@ class VerificationScreen extends StatelessWidget {
                         ),
                         Center(
                           child: Padding(
-                            padding: const EdgeInsets.only(
-                                left: 40.0, bottom: 18, top: 40, right: 40),
-                            child: Text(
-                                "We just sent a verification code to your email. Please enter the code",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.normal,
-                                    fontSize: 12)),
-                          ),
+                              padding: const EdgeInsets.only(
+                                  left: 40.0, bottom: 18, top: 40, right: 40),
+                              child: RichText(
+                                textAlign: TextAlign.center,
+                                text: TextSpan(
+                                  text:
+                                      'We just sent a verification code to your email ',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 12,
+                                      color: Colors.black,
+                                      fontFamily: 'BasisGrotesquePro'),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: 'Please enter the code',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 12,
+                                          color: Colors.black,
+                                          fontFamily: 'BasisGrotesquePro'),
+                                    ),
+                                  ],
+                                ),
+                              )),
                         ),
                         YMargin(20),
                         GetBuilder<LoginController>(

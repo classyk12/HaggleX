@@ -68,7 +68,7 @@ class RegisterScreen extends StatelessWidget {
                                 controller: _loginController.passwordController,
                                 keyboardType: TextInputType.text,
                                 borderColor: Colors.black,
-                                focusedBorderColor: Colors.black,
+                                focusedBorderColor: Color(0xffBA3AF9),
                                 labelText: "Email Address",
                                 isPassword: false,
                                 textColor: Colors.black,
@@ -81,7 +81,7 @@ class RegisterScreen extends StatelessWidget {
                                 controller: _loginController.passwordController,
                                 keyboardType: TextInputType.text,
                                 borderColor: Colors.black,
-                                focusedBorderColor: Colors.black,
+                                focusedBorderColor: Color(0xffBA3AF9),
                                 labelText: "Password (Min. 8 characters)",
                                 isPassword: false,
                                 textColor: Colors.black,
@@ -94,56 +94,64 @@ class RegisterScreen extends StatelessWidget {
                                 controller: _loginController.passwordController,
                                 keyboardType: TextInputType.text,
                                 borderColor: Colors.black,
-                                focusedBorderColor: Colors.black,
+                                focusedBorderColor: Color(0xffBA3AF9),
                                 labelText: "Create a username",
                                 isPassword: false,
                                 textColor: Colors.black,
                                 labelTextColor: Colors.black)),
                         YMargin(15),
-                        // TextInput(
-                        //   controller: _loginController.passwordController,
-                        //   borderColor: Colors.grey,
-                        //   focusedBorderColor: Colors.grey,
-                        //   labelText: 'Phone number',
-                        //   isPassword: false,
-                        //   textColor: Colors.black,
-                        //   labelTextColor: Colors.grey[600],
-                        //   keyboardType: TextInputType.phone,
-                        //   prefixWidget: Container(
-                        //     width: 45,
-                        //     height: 20,
-                        //     child: Row(children: <Widget>[
-                        //       Image.asset('assets/images/logo1.png',
-                        //           height: 14, width: 14),
-                        //       Padding(
-                        //         padding:
-                        //             const EdgeInsets.only(right: 1.0, left: 0.5),
-                        //         child: Text("+234", style: TextStyle(fontSize: 10)),
-                        //       )
-                        //     ]),
-                        //   ),
-                        // ),
                         Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              // Container(
-                              //   width: 0.2,
-                              //   color: Colors.red,
-                              //   child: Text('pnc'),
-                              // ),
-                              Expanded(
-                                child: GetBuilder<LoginController>(
-                                    builder: (value) => TextInput(
-                                        controller:
-                                            _loginController.passwordController,
-                                        keyboardType: TextInputType.text,
-                                        borderColor: Colors.black,
-                                        focusedBorderColor: Colors.black,
-                                        labelText: "Enter your phone number",
-                                        isPassword: false,
-                                        textColor: Colors.black,
-                                        labelTextColor: Colors.black)),
+                              XMargin(10),
+                              Container(
+                                width: Get.width * 0.2,
+                                decoration: BoxDecoration(
+                                    color: Color(0xffE8E8E8),
+                                    border:
+                                        Border.all(color: Colors.grey[400])),
+
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Image.asset(
+                                        'assets/images/flag.png',
+                                        height: 20,
+                                        width: 20,
+                                      ),
+                                      Expanded(
+                                        child: Text('  (+234)',
+                                            style: TextStyle(
+                                                fontSize: 11,
+                                                color: Colors.black)),
+                                      )
+                                    ],
+                                  ),
+                                ), //#0000001A
                               ),
+                              GetBuilder<LoginController>(
+                                  builder: (value) => Expanded(
+                                        child: SizedBox(
+                                          width: Get.width * 0.7,
+                                          child: TextInput(
+                                              controller: _loginController
+                                                  .passwordController,
+                                              keyboardType: TextInputType.text,
+                                              borderColor: Colors.black,
+                                              focusedBorderColor:
+                                                  Color(0xffBA3AF9),
+                                              labelText:
+                                                  "Enter your phone number",
+                                              isPassword: false,
+                                              textColor: Colors.black,
+                                              labelTextColor: Colors.black),
+                                        ),
+                                      )),
                             ]),
                         YMargin(20),
                         GetBuilder<LoginController>(
@@ -151,7 +159,7 @@ class RegisterScreen extends StatelessWidget {
                                 controller: _loginController.passwordController,
                                 keyboardType: TextInputType.text,
                                 borderColor: Colors.black,
-                                focusedBorderColor: Colors.black,
+                                focusedBorderColor: Color(0xffBA3AF9),
                                 labelText: "Referral code (optional)",
                                 isPassword: false,
                                 textColor: Colors.black,

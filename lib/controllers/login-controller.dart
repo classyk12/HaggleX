@@ -3,17 +3,24 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
 class LoginController extends GetxController {
-  // AuthService _socialLoginService = locator<SocialLogin>();
   TextEditingController usernameController;
   TextEditingController passwordController;
   bool isPassword = true;
-//when the page is allocated in memory
+  FocusNode _focusNode;
   @override
   void onInit() {
     usernameController = new TextEditingController();
     passwordController = new TextEditingController();
+    _focusNode = new FocusNode();
+    //_focusNode.addListener(_onOnFocusNodeEvent);
     super.onInit();
   }
+
+  //  onOnFocusNodeEvent() {
+  //   setState(() {
+  //     // Re-renders
+  //   });
+  // }
 
   Future login() async {}
 
@@ -27,6 +34,7 @@ class LoginController extends GetxController {
   void onClose() {
     usernameController?.dispose();
     passwordController?.dispose();
+    _focusNode.dispose();
     super.onClose();
   }
 }

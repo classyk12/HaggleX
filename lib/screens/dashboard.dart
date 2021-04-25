@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haggle_clone/helpers/mock-values.dart';
@@ -10,6 +11,7 @@ class DashboardScreen extends StatefulWidget {
 
 class _DashboardScreenState extends State<DashboardScreen> {
   int _index = 0;
+  int _selectedvalue = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +33,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(12.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -65,18 +67,27 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               fontSize: 21,
                               fontWeight: FontWeight.bold)),
                       Stack(alignment: Alignment.topRight, children: [
-                        Icon(Icons.notifications,
-                            color: Colors.white, size: 30),
                         Container(
-                            child: Padding(
-                              padding: const EdgeInsets.all(2.0),
-                              child: Text('5',
-                                  style: TextStyle(color: Colors.white)),
-                            ),
+                          width: 30,
+                          height: 30,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Color(0xff7362A1).withOpacity(0.2)),
+                          child: Center(
+                            child: Icon(Icons.notifications,
+                                color: Colors.white, size: 15),
+                          ),
+                        ),
+                        Container(
                             height: 15,
                             width: 15,
                             decoration: BoxDecoration(
-                                color: Colors.red, shape: BoxShape.circle))
+                                shape: BoxShape.circle, color: Colors.red),
+                            child: Center(
+                              child: Text('5',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 11)),
+                            ))
                       ])
                     ],
                   ),
@@ -89,7 +100,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ),
                 YMargin(12),
                 Padding(
-                  padding: const EdgeInsets.only(left: 12.0),
+                  padding: const EdgeInsets.only(left: 12.0, right: 12),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -98,7 +109,36 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               color: Colors.white,
                               fontSize: 25,
                               fontWeight: FontWeight.w400)),
-                      Text("N****"),
+                      //cupertino
+                      Container(
+                        width: Get.width * 0.25,
+                        padding: EdgeInsets.only(
+                            left: 5, right: 5, top: 2, bottom: 2),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20)),
+                        child: CupertinoSlidingSegmentedControl(
+                            thumbColor: Color(0xffFFC175),
+                            children: {
+                              0: Text('USD',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 8)),
+                              1: Text('NGN',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 8))
+                            },
+                            groupValue: _selectedvalue,
+                            onValueChanged: (newValue) {
+                              setState(() {
+                                _selectedvalue = newValue;
+                                print(_selectedvalue);
+                              });
+                            }),
+                      ),
                     ],
                   ),
                 )
@@ -112,7 +152,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           padding: const EdgeInsets.only(top: 8.0),
           child: Container(
             color: Color(0xFFF3F3F3),
-            height: Get.height * 0.184,
+            height: Get.height * 0.19,
             width: Get.width * 0.8, // card height
             child: Padding(
               padding: const EdgeInsets.only(bottom: 4),
