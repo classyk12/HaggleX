@@ -6,10 +6,15 @@ import 'package:haggle_clone/screens/login.dart';
 import 'package:haggle_clone/screens/setup-complete.dart';
 import 'package:haggle_clone/screens/signup.dart';
 import 'package:haggle_clone/screens/splash_screen.dart';
+import 'package:haggle_clone/screens/tabs-page.dart';
 import 'package:haggle_clone/screens/verification.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Color(0xFF2E1963),
+    statusBarBrightness: Brightness.dark,
+  ));
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(new MyApp());
@@ -46,7 +51,7 @@ class MyApp extends StatelessWidget {
           ),
           GetPage(
             name: '/dashboard',
-            page: () => DashboardScreen(),
+            page: () => TabsPage(),
           ),
         ]);
   }
