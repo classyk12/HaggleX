@@ -35,15 +35,21 @@ class LoginScreen extends StatelessWidget {
                         fontSize: 40,
                         fontWeight: FontWeight.bold)),
               ),
-              TextInput(
-                controller: _loginController.usernameController,
-                keyboardType: TextInputType.emailAddress,
-                borderColor: Colors.white,
-                focusedBorderColor: Color(0xffBA3AF9),
-                labelText: "Email Address",
-                isPassword: false,
-                textColor: Colors.white,
-                labelTextColor: Colors.white,
+              GetBuilder<LoginController>(
+                builder: (x) {
+                  return TextInput(
+                    focusNode: x.focusNode,
+                    controller: _loginController.usernameController,
+                    keyboardType: TextInputType.emailAddress,
+                    borderColor: Colors.white,
+                    focusedBorderColor: Color(0xffBA3AF9),
+                    labelText: "Email Address",
+                    isPassword: false,
+                    textColor: Colors.white,
+                    labelTextColor:
+                        x.focusNode.hasFocus ? Color(0xffBA3AF9) : Colors.white,
+                  );
+                },
               ),
               YMargin(20),
               GetBuilder<LoginController>(

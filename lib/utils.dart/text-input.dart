@@ -6,6 +6,7 @@ class TextInput extends StatefulWidget {
   final TextInputType keyboardType;
   final Color textColor;
   final double borderWidth;
+  final FocusNode focusNode;
   final String hintText;
   final String Function(String) validator;
   final VoidCallback iconAction;
@@ -37,7 +38,8 @@ class TextInput extends StatefulWidget {
       this.iconAction,
       this.labelText = '',
       this.textColor,
-      this.contentPadding});
+      this.contentPadding,
+      this.focusNode});
 
   @override
   _TextInputState createState() => _TextInputState();
@@ -51,6 +53,7 @@ class _TextInputState extends State<TextInput> {
           const EdgeInsets.only(top: 5.0, bottom: 5.0, right: 15, left: 15.0),
       child: Container(
         child: TextField(
+          focusNode: this.widget.focusNode,
           obscureText: this.widget.isPassword,
           controller: this.widget.controller,
           keyboardType: this.widget.keyboardType,

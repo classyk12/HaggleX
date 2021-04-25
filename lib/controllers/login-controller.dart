@@ -6,21 +6,16 @@ class LoginController extends GetxController {
   TextEditingController usernameController;
   TextEditingController passwordController;
   bool isPassword = true;
-  FocusNode _focusNode;
+  FocusNode focusNode;
+
   @override
   void onInit() {
     usernameController = new TextEditingController();
     passwordController = new TextEditingController();
-    _focusNode = new FocusNode();
+    focusNode = new FocusNode();
     //_focusNode.addListener(_onOnFocusNodeEvent);
     super.onInit();
   }
-
-  //  onOnFocusNodeEvent() {
-  //   setState(() {
-  //     // Re-renders
-  //   });
-  // }
 
   Future login() async {}
 
@@ -34,7 +29,7 @@ class LoginController extends GetxController {
   void onClose() {
     usernameController?.dispose();
     passwordController?.dispose();
-    _focusNode.dispose();
+    focusNode.dispose();
     super.onClose();
   }
 }

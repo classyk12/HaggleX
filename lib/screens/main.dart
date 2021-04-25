@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:haggle_clone/screens/countrypicker.dart';
 import 'package:haggle_clone/screens/dashboard.dart';
 import 'package:haggle_clone/screens/login.dart';
 import 'package:haggle_clone/screens/setup-complete.dart';
@@ -52,6 +53,10 @@ class MyApp extends StatelessWidget {
           GetPage(
             name: '/dashboard',
             page: () => TabsPage(),
+          ),
+          GetPage(
+            name: '/countrycode-picker',
+            page: () => CountryPickerScreen(),
           ),
         ]);
   }

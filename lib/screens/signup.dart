@@ -100,59 +100,64 @@ class RegisterScreen extends StatelessWidget {
                                 textColor: Colors.black,
                                 labelTextColor: Colors.black)),
                         YMargin(15),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              XMargin(10),
-                              Container(
-                                width: Get.width * 0.2,
-                                decoration: BoxDecoration(
-                                    color: Color(0xffE8E8E8),
-                                    border:
-                                        Border.all(color: Colors.grey[400])),
+                        InkWell(
+                          onTap: () => Get.toNamed('/countrycode-picker'),
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                XMargin(10),
+                                Container(
+                                  width: Get.width * 0.2,
+                                  decoration: BoxDecoration(
+                                      color: Color(0xffE8E8E8),
+                                      border:
+                                          Border.all(color: Colors.grey[400])),
 
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        'assets/images/flag.png',
-                                        height: 20,
-                                        width: 20,
-                                      ),
-                                      Expanded(
-                                        child: Text('  (+234)',
-                                            style: TextStyle(
-                                                fontSize: 11,
-                                                color: Colors.black)),
-                                      )
-                                    ],
-                                  ),
-                                ), //#0000001A
-                              ),
-                              GetBuilder<LoginController>(
-                                  builder: (value) => Expanded(
-                                        child: SizedBox(
-                                          width: Get.width * 0.7,
-                                          child: TextInput(
-                                              controller: _loginController
-                                                  .passwordController,
-                                              keyboardType: TextInputType.text,
-                                              borderColor: Colors.black,
-                                              focusedBorderColor:
-                                                  Color(0xffBA3AF9),
-                                              labelText:
-                                                  "Enter your phone number",
-                                              isPassword: false,
-                                              textColor: Colors.black,
-                                              labelTextColor: Colors.black),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Image.asset(
+                                          'assets/images/flag.png',
+                                          height: 20,
+                                          width: 20,
                                         ),
-                                      )),
-                            ]),
+                                        Expanded(
+                                          child: Text('  (+234)',
+                                              style: TextStyle(
+                                                  fontSize: 11,
+                                                  color: Colors.black)),
+                                        )
+                                      ],
+                                    ),
+                                  ), //#0000001A
+                                ),
+                                GetBuilder<LoginController>(
+                                    builder: (value) => Expanded(
+                                          child: SizedBox(
+                                            width: Get.width * 0.7,
+                                            child: TextInput(
+                                                controller: _loginController
+                                                    .passwordController,
+                                                keyboardType:
+                                                    TextInputType.text,
+                                                borderColor: Colors.black,
+                                                focusedBorderColor:
+                                                    Color(0xffBA3AF9),
+                                                labelText:
+                                                    "Enter your phone number",
+                                                isPassword: false,
+                                                textColor: Colors.black,
+                                                labelTextColor: Colors.black),
+                                          ),
+                                        )),
+                              ]),
+                        ),
                         YMargin(20),
                         GetBuilder<LoginController>(
                             builder: (value) => TextInput(
