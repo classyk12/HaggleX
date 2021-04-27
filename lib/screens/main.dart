@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:haggle_clone/screens/countrypicker.dart';
-import 'package:haggle_clone/screens/dashboard.dart';
 import 'package:haggle_clone/screens/login.dart';
 import 'package:haggle_clone/screens/setup-complete.dart';
 import 'package:haggle_clone/screens/signup.dart';
@@ -12,17 +12,22 @@ import 'package:haggle_clone/screens/verification.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Color(0xFF2E1963),
     statusBarBrightness: Brightness.dark,
   ));
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
+    //runApp();
     runApp(new MyApp());
   });
 }
 
 class MyApp extends StatelessWidget {
+  //final ValueNotifier<GraphQLClient> client;
+
+  //const MyApp({Key key, this.client}) : super(key: key);
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
