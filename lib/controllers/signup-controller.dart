@@ -1,21 +1,65 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:haggle_clone/commands/commands-queries.dart';
+import 'package:haggle_clone/configiration/qlconfig.dart';
+import 'package:haggle_clone/helpers/mock-values.dart';
+import 'package:haggle_clone/models/countries.dart';
+import 'package:haggle_clone/models/create-user.dart';
 
-class LoginController extends GetxController {
-  // AuthService _socialLoginService = locator<SocialLogin>();
-  TextEditingController usernameController;
+class SignUpController extends GetxController {
+  TextEditingController emailController;
   TextEditingController passwordController;
+  TextEditingController phoneNumberController;
+  TextEditingController referralCodeController;
+  TextEditingController userNameController;
+  QLConfig _client = QLConfig();
+  CreateUserResponse response;
+  GetActiveCountries selectedCountry;
+  QueryMutation _actions = QueryMutation();
   bool isPassword = true;
-//when the page is allocated in memory
-  @override
+
   void onInit() {
-    usernameController = new TextEditingController();
+    emailController = new TextEditingController();
     passwordController = new TextEditingController();
+    referralCodeController = new TextEditingController();
+    phoneNumberController = new TextEditingController();
+    userNameController = new TextEditingController();
+    selectedCountry = DashBoardMockClass.getDefaultValue();
+
     super.onInit();
   }
 
-  Future login() async {}
+  Future createUser() async {
+    // var detail = new PhoneNumberDetail(selectedCountry.callingCode,
+    //     selectedCountry.flag, phoneNumberController.text);
+    print(selectedCountry);
+    final MutationOptions options =
+        // ignore: deprecated_member_use
+        MutationOptions(documentNode: gql(_actions.createUser()), variables: {
+      "email": emailController.text,
+      "password": passwordController.text,
+      "referralCode": referralCodeController.text,
+      "username": userNameController.text,
+      "phonenumber": phoneNumberController.text,
+      "currency": selectedCountry.currencyCode,
+      "country": selectedCountry.name,
+      "phoneNumber": phoneNumberController.text,
+      "callingCode": selectedCountry.callingCode,
+      "flag": selectedCountry.flag
+    });
+
+    QueryResult result = await _client.client.value.mutate(options);
+    if (!result.hasException) {
+      // print(result.data['register']);
+      response = CreateUserResponse.fromJson(result.data['register']);
+
+      //todo: save data in local storage
+      Get.toNamed('/verification');
+    }
+    update();
+  }
 
   showPassword() {
     this.isPassword = !this.isPassword;
@@ -25,8 +69,6 @@ class LoginController extends GetxController {
   //dispose text controllers after use
   @override
   void onClose() {
-    usernameController?.dispose();
-    passwordController?.dispose();
     super.onClose();
   }
 }

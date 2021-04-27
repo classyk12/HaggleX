@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:haggle_clone/screens/countrypicker.dart';
 import 'package:haggle_clone/screens/login.dart';
 import 'package:haggle_clone/screens/setup-complete.dart';

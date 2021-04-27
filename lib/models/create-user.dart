@@ -64,7 +64,7 @@ class User {
 @JsonSerializable(nullable: false)
 class CreateUserResponse {
   String token;
-  String user;
+  User user;
 
   CreateUserResponse(this.user, this.token);
   factory CreateUserResponse.fromJson(Map<String, dynamic> json) =>

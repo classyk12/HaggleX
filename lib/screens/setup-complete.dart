@@ -1,15 +1,11 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:haggle_clone/controllers/login-controller.dart';
 import 'package:haggle_clone/utils.dart/margin.dart';
-import 'package:haggle_clone/utils.dart/text-input.dart';
 import 'package:haggle_clone/utils.dart/themes.dart';
 import 'package:haggle_clone/widgets/button.dart';
 
 class SetUpCompleteScreen extends StatelessWidget {
-  final LoginController _loginController = Get.put(LoginController());
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

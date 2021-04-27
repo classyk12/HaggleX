@@ -1,14 +1,53 @@
+import 'package:haggle_clone/models/create-user.dart';
+
 class QueryMutation {
-  String addPerson(String id, String name, String lastName, int age) {
-    return """
-      mutation{
-          addPerson(id: "$id", name: "$name", lastName: "$lastName", age: $age){
-            id
-            name
-            lastName
-            age
+  String createUser() {
+    return """ 
+      
+       mutation (\$email: String!,
+      \$username: String!,
+       \$password: String!,
+       \$phonenumber: String!,
+       \$referralCode: String,
+       \$country: String!,
+       \$currency: String!,
+       \$phoneNumber: String!,
+      \$callingCode: String!,
+      \$flag: String!,
+    ){
+      register(data: {
+        email: \$email,
+        username: \$username,
+        password: \$password,
+        phonenumber: \$phonenumber,
+        referralCode: \$referralCode,
+        country: \$country,
+        currency: \$currency,
+        phoneNumberDetails: {
+          phoneNumber: \$phoneNumber,
+          callingCode: \$callingCode,
+          flag: \$flag
+        }
+        
+      }) {
+        token
+        user{
+          _id
+          email
+          phonenumber
+          phoneNumberDetails{
+            phoneNumber
+            callingCode
+            flag
           }
+          referralCode
+          username 
+          kycStatus
+          createdAt
+        }
       }
+    }
+      
     """;
   }
 
@@ -27,6 +66,38 @@ class QueryMutation {
             flag
         }
       }
+    """;
+  }
+
+  String login() {
+    return """ 
+      
+       mutation (\$input: String!,
+       \$password: String!
+    ){
+      login(data: {
+        input: \$input,
+        password: \$password,
+        
+      })
+       {
+        token
+        user{
+          _id
+          email
+          username
+          phonenumber
+          phoneNumberDetails{
+            phoneNumber
+            callingCode
+            flag
+          }
+        
+        }
+         twoFactorAuth
+      }
+    }
+      
     """;
   }
 }

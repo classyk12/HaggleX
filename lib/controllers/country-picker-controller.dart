@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -9,11 +10,13 @@ class CountryPickerController extends GetxController {
   List<GetActiveCountries> countries;
   GetActiveCountries selectedCountry;
   QLConfig _client = QLConfig();
+  TextEditingController searchController;
   QueryMutation _actions = QueryMutation();
 
   @override
   void onInit() {
     countries = <GetActiveCountries>[];
+    searchController = new TextEditingController();
     getActiveCountries();
     super.onInit();
   }
