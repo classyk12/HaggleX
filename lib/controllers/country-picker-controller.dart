@@ -11,16 +11,18 @@ class CountryPickerController extends GetxController {
   GetActiveCountries selectedCountry;
   TextEditingController searchController;
   QueryMutation _actions = QueryMutation();
-
+  bool loading;
   @override
   void onInit() {
     countries = <GetActiveCountries>[];
     searchController = new TextEditingController();
+    loading = true;
     getActiveCountries();
     super.onInit();
   }
 
   Future getActiveCountries() async {
+    loading = true;
     final QueryOptions options = QueryOptions(
       documentNode: gql(_actions.getActiveCountries()),
     );
@@ -33,9 +35,10 @@ class CountryPickerController extends GetxController {
       for (var item in result.data['getActiveCountries']) {
         countries.add(GetActiveCountries.fromJson(item));
       }
-      // return countries;
+    } else {
+      //handle error
     }
-    // print(result.exception.graphqlErrors.first.message);
+    loading = false;
     update();
   }
 

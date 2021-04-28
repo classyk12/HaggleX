@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:haggle_clone/helpers/mock-values.dart';
+import 'package:haggle_clone/helpers/storage-helper.dart';
 import 'package:haggle_clone/utils.dart/margin.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -12,8 +13,11 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   int _index = 0;
   int _selectedvalue = 0;
+  String username;
+
   @override
   Widget build(BuildContext context) {
+    username = Storage.read('username');
     return Scaffold(
         body: ListView(
       // shrinkWrap: true,
@@ -38,28 +42,72 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Container(
-                        padding: EdgeInsets.all(3),
-                        //  color: Colors.red,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.white),
-                            shape: BoxShape.circle,
-                            color: Colors.transparent),
+                      InkWell(
+                        onTap: () {
+                          showModalBottomSheet<void>(
+                            backgroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15)),
+                                height: Get.height * 0.1,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: InkWell(
+                                    onTap: () {
+                                      Storage.remove('token');
+                                      Storage.remove('username');
+                                      Get.offAllNamed('/login');
+                                    },
+                                    child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Icon(Icons.power_settings_new,
+                                              color: Colors.red[600], size: 30),
+                                          XMargin(5),
+                                          Text('Logout',
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold)),
+                                        ]),
+                                  ),
+                                ),
+                              );
+                            },
+                          );
+                        },
                         child: Container(
-                            // margin: EdgeInsets.all(3),
-                            //  padding: EdgeInsets.all(3),
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.white),
-                                shape: BoxShape.circle,
-                                color: Color(0xffE9BBFF)),
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Text('SV',
-                                  style: TextStyle(
-                                      color: Color(0xff2E1963).withOpacity(1.0),
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold)),
-                            )),
+                          padding: EdgeInsets.all(3),
+                          //  color: Colors.red,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.white),
+                              shape: BoxShape.circle,
+                              color: Colors.transparent),
+                          child: Container(
+                              // margin: EdgeInsets.all(3),
+                              //  padding: EdgeInsets.all(3),
+                              decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.white),
+                                  shape: BoxShape.circle,
+                                  color: Color(0xffE9BBFF)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Text(
+                                    '${username.substring(0, 2).toUpperCase()}',
+                                    style: TextStyle(
+                                        color:
+                                            Color(0xff2E1963).withOpacity(1.0),
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.bold)),
+                              )),
+                        ),
                       ),
                       Text('HaggleX',
                           style: TextStyle(
@@ -104,11 +152,42 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(r"$****",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 25,
-                              fontWeight: FontWeight.w400)),
+                      _selectedvalue == 0
+                          ? Text(r"$****",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.w400))
+                          : RichText(
+                              text: TextSpan(children: [
+                                TextSpan(
+                                    text: 'N0.00',
+                                    style: TextStyle(
+                                        fontFamily: 'BasisGrotesquePro',
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 25)),
+                                WidgetSpan(
+                                  child: Transform.translate(
+                                    offset: const Offset(3, -18),
+                                    child: Text(
+                                      'NGN',
+                                      //superscript is usually smaller in size
+                                      textScaleFactor: 0.7,
+                                      style: TextStyle(
+                                          fontFamily: 'BasisGrotesquePro',
+                                          color: Colors.white,
+                                          fontSize: 12),
+                                    ),
+                                  ),
+                                )
+                              ]),
+                            ),
+                      // : Text("N0.00",
+                      //     style: TextStyle(
+                      //         color: Colors.white,
+                      //         fontSize: 25,
+                      //         fontWeight: FontWeight.w400)),
                       //cupertino
                       Container(
                         width: Get.width * 0.25,
