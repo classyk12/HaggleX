@@ -6,8 +6,11 @@ import 'package:haggle_clone/commands/commands-queries.dart';
 import 'package:haggle_clone/configiration/qlconfig.dart';
 import 'package:haggle_clone/helpers/mock-values.dart';
 import 'package:haggle_clone/helpers/storage-helper.dart';
+import 'package:haggle_clone/helpers/validators.dart';
 import 'package:haggle_clone/models/countries.dart';
 import 'package:haggle_clone/models/create-user.dart';
+import 'package:haggle_clone/widgets/common.dart';
+import 'package:haggle_clone/widgets/loader.dart';
 
 class SignUpController extends GetxController {
   TextEditingController emailController;
@@ -31,10 +34,22 @@ class SignUpController extends GetxController {
     super.onInit();
   }
 
-  Future createUser() async {
-    // var detail = new PhoneNumberDetail(selectedCountry.callingCode,
-    //     selectedCountry.flag, phoneNumberController.text);
-    print(selectedCountry);
+  Future createUser(BuildContext context) async {
+    var validate = Validators.validateRegister(
+        emailController.text.trim(),
+        passwordController.text.trim(),
+        phoneNumberController.text.trim(),
+        userNameController.text.trim());
+
+    if (!validate.status) {
+      CommonDialogs.showSnackInfo(
+          'Validation error', validate.message, Icons.error, Colors.red[900]);
+      return;
+    }
+
+    //start loading
+    ImageLoader.show(context);
+
     final MutationOptions options =
         // ignore: deprecated_member_use
         MutationOptions(documentNode: gql(_actions.createUser()), variables: {
@@ -54,19 +69,24 @@ class SignUpController extends GetxController {
 
     QueryResult result = await client.value.mutate(options);
     if (!result.hasException) {
-      // print(result.data['register']);
       response = CreateUserResponse.fromJson(result.data['register']);
 
       //todo: save data in local storage
       Storage.save('token', response.token);
       Storage.save('username', response.user.username);
-      print('stored');
+
+      ImageLoader.hide();
 
       Get.toNamed('/verification');
+    } else {
+      ImageLoader.hide();
+      CommonDialogs.showSnackInfo(
+          'Error',
+          result.exception.graphqlErrors.first.message ?? 'An error occurred',
+          Icons.error,
+          Colors.deepPurple[300]);
+      return;
     }
-
-    //print(result.exception.graphqlErrors.first.message);
-    update();
   }
 
   showPassword() {

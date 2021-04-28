@@ -131,7 +131,7 @@ class VerificationScreen extends StatelessWidget {
                             text: 'VERIFY ME',
 
                             onPressed: () =>
-                                _verificationController.verifyCode(),
+                                _verificationController.verifyCode(context),
                             //width: Get.width * 0.8,
                             height: Get.height * 0.07,
                           ),
@@ -143,7 +143,8 @@ class VerificationScreen extends StatelessWidget {
                               style: TextStyle(fontSize: 11)),
                         ),
                         InkWell(
-                          onTap: () => _verificationController.resendCode(),
+                          onTap: () =>
+                              _verificationController.resendCode(context),
                           child: Padding(
                             padding: const EdgeInsets.only(
                                 top: 10.0, bottom: 40, left: 15),

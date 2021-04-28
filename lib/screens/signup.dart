@@ -85,7 +85,7 @@ class RegisterScreen extends StatelessWidget {
                                 keyboardType: TextInputType.text,
                                 borderColor: Colors.black,
                                 focusedBorderColor: Color(0xffBA3AF9),
-                                labelText: "Password (Min. 8 characters)",
+                                labelText: "Password (Min 8 characters)",
                                 isPassword: true,
                                 textColor: Colors.black,
                                 labelTextColor: Colors.black)),
@@ -111,56 +111,70 @@ class RegisterScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 XMargin(10),
-                                Container(
-                                  width: Get.width * 0.2,
-                                  decoration: BoxDecoration(
-                                      color: Color(0xffE8E8E8),
-                                      border:
-                                          Border.all(color: Colors.grey[400])),
+                                Column(
+                                  children: [
+                                    YMargin(15),
+                                    Container(
+                                      width: Get.width * 0.2,
+                                      decoration: BoxDecoration(
+                                          color: Color(0xffE8E8E8),
+                                          borderRadius:
+                                              BorderRadius.circular(2),
+                                          border: Border.all(
+                                              color: Colors.grey[400])),
 
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: GetBuilder<SignUpController>(
-                                      builder: (s) {
-                                        return Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            SvgPicture.network(
-                                                s.selectedCountry.flag,
-                                                placeholderBuilder: (context) =>
-                                                    Container(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(10),
+                                        child: GetBuilder<SignUpController>(
+                                          builder: (s) {
+                                            return Center(
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  SvgPicture.network(
+                                                      s.selectedCountry.flag,
+                                                      placeholderBuilder:
+                                                          (context) =>
+                                                              Container(
+                                                                height: 10,
+                                                                width: 10,
+                                                                child:
+                                                                    CircularProgressIndicator(
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .white,
+                                                                  strokeWidth:
+                                                                      1,
+                                                                ),
+                                                              ),
+                                                      semanticsLabel:
+                                                          'country Logo',
                                                       height: 10,
-                                                      width: 10,
-                                                      child:
-                                                          CircularProgressIndicator(
-                                                        backgroundColor:
-                                                            Colors.white,
-                                                        strokeWidth: 1,
-                                                      ),
-                                                    ),
-                                                semanticsLabel: 'country Logo',
-                                                height: 10,
-                                                width: 10),
-                                            // SvgImage.(
-                                            //   'assets/images/flag.png',
-                                            //   height: 20,
-                                            //   width: 20,
-                                            // ),
-                                            Expanded(
-                                              child: Text(
-                                                  '  ${s.selectedCountry.callingCode}',
-                                                  style: TextStyle(
-                                                      fontSize: 11,
-                                                      color: Colors.black)),
-                                            )
-                                          ],
-                                        );
-                                      },
+                                                      width: 10),
+                                                  // SvgImage.(
+                                                  //   'assets/images/flag.png',
+                                                  //   height: 20,
+                                                  //   width: 20,
+                                                  // ),
+                                                  Expanded(
+                                                    child: Text(
+                                                        '  (+${s.selectedCountry.callingCode})',
+                                                        style: TextStyle(
+                                                            fontSize: 11,
+                                                            color:
+                                                                Colors.black)),
+                                                  )
+                                                ],
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ), //#0000001A
                                     ),
-                                  ), //#0000001A
+                                  ],
                                 ),
                                 GetBuilder<SignUpController>(
                                     builder: (value) => Expanded(
@@ -224,7 +238,7 @@ class RegisterScreen extends StatelessWidget {
                                 ),
                                 text: 'SIGN UP',
 
-                                onPressed: () => x.createUser(),
+                                onPressed: () => x.createUser(context),
                                 //width: Get.width * 0.8,
                                 height: Get.height * 0.07,
                               ),

@@ -17,15 +17,16 @@ class CommonDialogs {
   //snackbar by GET
   static showSnackInfo(String titleText, String messageText, IconData icon,
       Color backgroundColor,
-      {double iconSize = 50,
+      {double iconSize = 30,
       int duration = 3,
-      SnackPosition position = SnackPosition.TOP}) {
-    return Get.rawSnackbar(
-        title: '',
-        message: '',
+      SnackPosition position = SnackPosition.BOTTOM}) {
+    return Get.snackbar("", "",
         snackStyle: SnackStyle.GROUNDED,
         titleText: Text(titleText,
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+            style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 15)),
         messageText: Text(messageText,
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.w500)),
         snackPosition: position,

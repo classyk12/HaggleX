@@ -6,6 +6,8 @@ import 'package:haggle_clone/commands/commands-queries.dart';
 import 'package:haggle_clone/configiration/qlconfig.dart';
 import 'package:haggle_clone/controllers/signup-controller.dart';
 import 'package:haggle_clone/models/create-user.dart';
+import 'package:haggle_clone/widgets/common.dart';
+import 'package:haggle_clone/widgets/loader.dart';
 
 class VerificationController extends GetxController {
   TextEditingController codeController;
@@ -22,7 +24,14 @@ class VerificationController extends GetxController {
     super.onInit();
   }
 
-  Future verifyCode() async {
+  Future verifyCode(BuildContext context) async {
+    if (codeController.text.trim().isEmpty) {
+      CommonDialogs.showSnackInfo('Validation error', "enter a valid code",
+          Icons.error, Colors.red[900]);
+      return;
+    }
+    //start loading
+    ImageLoader.show(context);
     final MutationOptions options =
         // ignore: deprecated_member_use
         MutationOptions(
@@ -32,16 +41,22 @@ class VerificationController extends GetxController {
     var client = QLConfig.getClientWithAuth();
     QueryResult result = await client.value.mutate(options);
     if (!result.hasException) {
-      print(result.data['verifyUser']['user']);
-
-      // response = User.fromJson(result.data['verifyUser']['user']);
-
+      ImageLoader.hide();
       Get.offAllNamed('/setup-complete');
+    } else {
+      ImageLoader.hide();
+      CommonDialogs.showSnackInfo(
+          'Error',
+          result.exception.graphqlErrors.first.message ?? 'An error occurred',
+          Icons.error,
+          Colors.deepPurple[300]);
+      return;
     }
-    update();
   }
 
-  Future resendCode() async {
+  Future resendCode(BuildContext context) async {
+    //start loading
+    ImageLoader.show(context);
     final QueryOptions options =
         // ignore: deprecated_member_use
         QueryOptions(
@@ -52,15 +67,18 @@ class VerificationController extends GetxController {
 
     QueryResult result = await client.value.query(options);
     if (!result.hasException) {
-      print(result.data);
-
-      // var response = ResendCodeResponse.fromJson(result.data);
-      print('resend complete');
-
-      // Get.offAllNamed('/setup-complete');
+      ImageLoader.hide();
+      CommonDialogs.showSnackInfo('Code resent', "code resent successfully ",
+          Icons.error, Colors.green[900]);
+    } else {
+      ImageLoader.hide();
+      CommonDialogs.showSnackInfo(
+          'Error',
+          result.exception.graphqlErrors.first.message ?? 'An error occurred',
+          Icons.error,
+          Colors.deepPurple[300]);
+      return;
     }
-    // print(result.exception.graphqlErrors.first.message);
-    update();
   }
 
   //dispose text controllers after use

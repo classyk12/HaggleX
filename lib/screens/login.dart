@@ -82,7 +82,7 @@ class LoginScreen extends StatelessWidget {
                     text: 'LOG IN',
                     onPressed: () {
                       InternetHelper.checkInternet(
-                          function: () => _loginController.login());
+                          function: () => _loginController.login(context));
                     },
                     //width: Get.width * 0.8,
                     height: Get.height * 0.07,

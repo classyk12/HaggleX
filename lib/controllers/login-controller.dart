@@ -5,7 +5,10 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:haggle_clone/commands/commands-queries.dart';
 import 'package:haggle_clone/configiration/qlconfig.dart';
 import 'package:haggle_clone/helpers/storage-helper.dart';
+import 'package:haggle_clone/helpers/validators.dart';
 import 'package:haggle_clone/models/login.dart';
+import 'package:haggle_clone/widgets/common.dart';
+import 'package:haggle_clone/widgets/loader.dart';
 
 class LoginController extends GetxController {
   TextEditingController usernameController;
@@ -19,12 +22,26 @@ class LoginController extends GetxController {
   void onInit() {
     usernameController = new TextEditingController();
     passwordController = new TextEditingController();
+
     focusNode = new FocusNode();
     //_focusNode.addListener(_onOnFocusNodeEvent);
     super.onInit();
   }
 
-  Future login() async {
+  Future login(BuildContext context) async {
+    //validate form
+    var validate = Validators.validateLogin(
+        usernameController.text.trim(), passwordController.text.trim());
+
+    if (!validate.status) {
+      CommonDialogs.showSnackInfo(
+          'Validation error', validate.message, Icons.error, Colors.red[900]);
+      return;
+    }
+
+    //start loading
+    ImageLoader.show(context);
+
     final MutationOptions options =
         // ignore: deprecated_member_use
         MutationOptions(documentNode: gql(_actions.login()), variables: {
@@ -35,22 +52,25 @@ class LoginController extends GetxController {
     var client = QLConfig.getClientWithoutAuth();
 
     QueryResult result = await client.value.mutate(options);
-    if (!result.hasException) {
-      print(result.data['login']);
 
+    if (!result.hasException) {
       response = LoginResponse.fromJson(result.data['login']);
 
       //todo: save data in local storage
       Storage.save('token', response.token);
       Storage.save('username', response.user.username);
-      print('stored');
-      Get.toNamed('/dashboard');
-
-      //todo: save data in local storage
-
+      ImageLoader.hide();
+      Get.offAllNamed('/dashboard');
+    } else {
+      ImageLoader.hide();
+      CommonDialogs.showSnackInfo(
+          'Error',
+          result.exception.graphqlErrors.first.message ?? 'An error occurred',
+          Icons.error,
+          Colors.deepPurple[300]);
+      return;
     }
-    print(result.exception.graphqlErrors.first.message);
-    update();
+    // update();
   }
 
   showPassword() {
