@@ -9,7 +9,6 @@ import 'package:haggle_clone/models/countries.dart';
 class CountryPickerController extends GetxController {
   List<GetActiveCountries> countries;
   GetActiveCountries selectedCountry;
-  QLConfig _client = QLConfig();
   TextEditingController searchController;
   QueryMutation _actions = QueryMutation();
 
@@ -26,7 +25,9 @@ class CountryPickerController extends GetxController {
       documentNode: gql(_actions.getActiveCountries()),
     );
 
-    QueryResult result = await _client.client.value.query(options);
+    var client = QLConfig.getClientWithoutAuth();
+
+    QueryResult result = await client.value.query(options);
     if (!result.hasException) {
       print(result.data['getActiveCountries']);
       for (var item in result.data['getActiveCountries']) {
@@ -34,7 +35,7 @@ class CountryPickerController extends GetxController {
       }
       // return countries;
     }
-    print(result.exception.graphqlErrors.first.message);
+    // print(result.exception.graphqlErrors.first.message);
     update();
   }
 

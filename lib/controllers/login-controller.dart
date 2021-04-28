@@ -12,7 +12,6 @@ class LoginController extends GetxController {
   TextEditingController passwordController;
   bool isPassword = true;
   FocusNode focusNode;
-  QLConfig _client = QLConfig();
   QueryMutation _actions = QueryMutation();
   LoginResponse response;
 
@@ -33,7 +32,9 @@ class LoginController extends GetxController {
       "password": passwordController.text
     });
 
-    QueryResult result = await _client.client.value.mutate(options);
+    var client = QLConfig.getClientWithoutAuth();
+
+    QueryResult result = await client.value.mutate(options);
     if (!result.hasException) {
       print(result.data['login']);
 

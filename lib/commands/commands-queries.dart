@@ -124,11 +124,9 @@ class QueryMutation {
 
   String resendCode() {
     return """ 
-      query resendVerificationCode(\$email: String!){
-        resendVerificationCode(email:\$email)
-        {
-          resendVerificationCode
-        }
+      query (\$email: String!){
+        resendVerificationCode(data:{email:\$email})
+        
       }
       
     """;

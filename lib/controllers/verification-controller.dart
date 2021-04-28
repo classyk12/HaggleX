@@ -6,13 +6,11 @@ import 'package:haggle_clone/commands/commands-queries.dart';
 import 'package:haggle_clone/configiration/qlconfig.dart';
 import 'package:haggle_clone/controllers/signup-controller.dart';
 import 'package:haggle_clone/models/create-user.dart';
-import 'package:haggle_clone/models/verify-user.dart';
 
 class VerificationController extends GetxController {
   TextEditingController codeController;
   SignUpController _signUpController = Get.find();
   FocusNode focusNode;
-  QLConfig _client = QLConfig();
   QueryMutation _actions = QueryMutation();
   User response;
 
@@ -31,11 +29,12 @@ class VerificationController extends GetxController {
             documentNode: gql(_actions.verifyUser()),
             variables: {"code": int.parse(codeController.text)});
 
-    QueryResult result = await _client.client.value.mutate(options);
+    var client = QLConfig.getClientWithAuth();
+    QueryResult result = await client.value.mutate(options);
     if (!result.hasException) {
       print(result.data['verifyUser']['user']);
 
-      response = User.fromJson(result.data['verifyUser']['user']);
+      // response = User.fromJson(result.data['verifyUser']['user']);
 
       Get.offAllNamed('/setup-complete');
     }
@@ -49,15 +48,18 @@ class VerificationController extends GetxController {
             documentNode: gql(_actions.resendCode()),
             variables: {"email": _signUpController.emailController.text});
 
-    QueryResult result = await _client.client.value.query(options);
+    var client = QLConfig.getClientWithAuth();
+
+    QueryResult result = await client.value.query(options);
     if (!result.hasException) {
       print(result.data);
 
-      var response = ResendCodeResponse.fromJson(result.data);
+      // var response = ResendCodeResponse.fromJson(result.data);
+      print('resend complete');
 
-      Get.offAllNamed('/setup-complete');
+      // Get.offAllNamed('/setup-complete');
     }
-    print(result.exception.graphqlErrors.first.message);
+    // print(result.exception.graphqlErrors.first.message);
     update();
   }
 

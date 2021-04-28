@@ -142,15 +142,18 @@ class VerificationScreen extends StatelessWidget {
                           child: Text('The code will expire in 10 minutes',
                               style: TextStyle(fontSize: 11)),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 10.0, bottom: 40, left: 15),
-                          child: Text('Resend Code',
-                              style: TextStyle(
-                                  decoration: TextDecoration.underline,
-                                  decorationThickness: 2,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.bold)),
+                        InkWell(
+                          onTap: () => _verificationController.resendCode(),
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                top: 10.0, bottom: 40, left: 15),
+                            child: Text('Resend Code',
+                                style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                    decorationThickness: 2,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold)),
+                          ),
                         ),
                         YMargin(30)
                       ]),

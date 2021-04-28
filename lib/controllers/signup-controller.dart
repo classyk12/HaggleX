@@ -15,7 +15,6 @@ class SignUpController extends GetxController {
   TextEditingController phoneNumberController;
   TextEditingController referralCodeController;
   TextEditingController userNameController;
-  QLConfig _client = QLConfig();
   CreateUserResponse response;
   GetActiveCountries selectedCountry;
   QueryMutation _actions = QueryMutation();
@@ -51,7 +50,9 @@ class SignUpController extends GetxController {
       "flag": selectedCountry.flag
     });
 
-    QueryResult result = await _client.client.value.mutate(options);
+    var client = QLConfig.getClientWithoutAuth();
+
+    QueryResult result = await client.value.mutate(options);
     if (!result.hasException) {
       // print(result.data['register']);
       response = CreateUserResponse.fromJson(result.data['register']);
@@ -64,7 +65,7 @@ class SignUpController extends GetxController {
       Get.toNamed('/verification');
     }
 
-    print(result.exception.graphqlErrors.first.message);
+    //print(result.exception.graphqlErrors.first.message);
     update();
   }
 

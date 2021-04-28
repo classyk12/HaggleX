@@ -3,22 +3,41 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:haggle_clone/helpers/storage-helper.dart';
 
 class QLConfig {
-  static String token = Storage.read('token');
+  static getClientWithAuth() {
+    String token = Storage.read('token');
 
-  static HttpLink link = HttpLink(
-    uri: 'https://hagglex-backend-staging.herokuapp.com/graphql',
-  );
+    HttpLink link = HttpLink(
+      uri: 'https://hagglex-backend-staging.herokuapp.com/graphql',
+    );
 
-  static AuthLink authLink = AuthLink(getToken: () {
-    return 'Bearer $token';
-  });
+    AuthLink authLink = AuthLink(getToken: () {
+      return 'Bearer $token';
+    });
 
-  static Link lnk = token == null ? link : authLink.concat(link);
+    Link lnk = authLink.concat(link);
 
-  ValueNotifier<GraphQLClient> client = ValueNotifier(
-    GraphQLClient(
-      cache: InMemoryCache(),
-      link: lnk,
-    ),
-  );
+    ValueNotifier<GraphQLClient> client = ValueNotifier(
+      GraphQLClient(
+        cache: InMemoryCache(),
+        link: lnk,
+      ),
+    );
+
+    return client;
+  }
+
+  static getClientWithoutAuth() {
+    HttpLink link = HttpLink(
+      uri: 'https://hagglex-backend-staging.herokuapp.com/graphql',
+    );
+
+    ValueNotifier<GraphQLClient> client = ValueNotifier(
+      GraphQLClient(
+        cache: InMemoryCache(),
+        link: link,
+      ),
+    );
+
+    return client;
+  }
 }
