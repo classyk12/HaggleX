@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:haggle_clone/controllers/login-controller.dart';
 import 'package:haggle_clone/controllers/signup-controller.dart';
+import 'package:haggle_clone/helpers/connection-checker.dart';
 import 'package:haggle_clone/utils.dart/margin.dart';
 import 'package:haggle_clone/utils.dart/text-input.dart';
 import 'package:haggle_clone/widgets/button.dart';
@@ -238,7 +239,10 @@ class RegisterScreen extends StatelessWidget {
                                 ),
                                 text: 'SIGN UP',
 
-                                onPressed: () => x.createUser(context),
+                                onPressed: () {
+                                  InternetHelper.checkInternet(
+                                      function: () => x.createUser(context));
+                                },
                                 //width: Get.width * 0.8,
                                 height: Get.height * 0.07,
                               ),
