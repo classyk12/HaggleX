@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:haggle_clone/screens/countrypicker.dart';
 import 'package:haggle_clone/screens/login.dart';
 import 'package:haggle_clone/screens/setup-complete.dart';
@@ -11,7 +12,7 @@ import 'package:haggle_clone/screens/verification.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await GetStorage.init();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Color(0xFF2E1963),
     statusBarBrightness: Brightness.dark,

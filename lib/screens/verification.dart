@@ -103,7 +103,7 @@ class VerificationScreen extends StatelessWidget {
                             builder: (value) => TextInput(
                                 controller:
                                     _verificationController.codeController,
-                                keyboardType: TextInputType.text,
+                                keyboardType: TextInputType.number,
                                 borderColor: Colors.black,
                                 focusedBorderColor: Colors.black,
                                 labelText: "Verification code",
@@ -130,9 +130,8 @@ class VerificationScreen extends StatelessWidget {
                             ),
                             text: 'VERIFY ME',
 
-                            onPressed: () {
-                              Get.offAllNamed('/setup-complete');
-                            },
+                            onPressed: () =>
+                                _verificationController.verifyCode(),
                             //width: Get.width * 0.8,
                             height: Get.height * 0.07,
                           ),

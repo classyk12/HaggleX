@@ -4,14 +4,17 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:haggle_clone/commands/commands-queries.dart';
 import 'package:haggle_clone/configiration/qlconfig.dart';
-import 'package:haggle_clone/models/login.dart';
+import 'package:haggle_clone/controllers/signup-controller.dart';
+import 'package:haggle_clone/models/create-user.dart';
+import 'package:haggle_clone/models/verify-user.dart';
 
 class VerificationController extends GetxController {
   TextEditingController codeController;
+  SignUpController _signUpController = Get.find();
   FocusNode focusNode;
   QLConfig _client = QLConfig();
   QueryMutation _actions = QueryMutation();
-  LoginResponse response;
+  User response;
 
   @override
   void onInit() {
@@ -21,22 +24,40 @@ class VerificationController extends GetxController {
     super.onInit();
   }
 
-  Future login() async {
+  Future verifyCode() async {
     final MutationOptions options =
         // ignore: deprecated_member_use
         MutationOptions(
-            documentNode: gql(_actions.login()),
-            variables: {"input": codeController.text});
+            documentNode: gql(_actions.verifyUser()),
+            variables: {"code": int.parse(codeController.text)});
 
     QueryResult result = await _client.client.value.mutate(options);
     if (!result.hasException) {
-      print(result.data['login']);
+      print(result.data['verifyUser']['user']);
 
-      response = LoginResponse.fromJson(result.data['login']);
+      response = User.fromJson(result.data['verifyUser']['user']);
 
-      //todo: save data in local storage
-      Get.toNamed('/verification');
+      Get.offAllNamed('/setup-complete');
     }
+    update();
+  }
+
+  Future resendCode() async {
+    final QueryOptions options =
+        // ignore: deprecated_member_use
+        QueryOptions(
+            documentNode: gql(_actions.resendCode()),
+            variables: {"email": _signUpController.emailController.text});
+
+    QueryResult result = await _client.client.value.query(options);
+    if (!result.hasException) {
+      print(result.data);
+
+      var response = ResendCodeResponse.fromJson(result.data);
+
+      Get.offAllNamed('/setup-complete');
+    }
+    print(result.exception.graphqlErrors.first.message);
     update();
   }
 

@@ -4,6 +4,7 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:haggle_clone/commands/commands-queries.dart';
 import 'package:haggle_clone/configiration/qlconfig.dart';
+import 'package:haggle_clone/helpers/storage-helper.dart';
 import 'package:haggle_clone/models/login.dart';
 
 class LoginController extends GetxController {
@@ -39,11 +40,15 @@ class LoginController extends GetxController {
       response = LoginResponse.fromJson(result.data['login']);
 
       //todo: save data in local storage
-      Get.toNamed('/verification');
+      Storage.save('token', response.token);
+      Storage.save('username', response.user.username);
+      print('stored');
+      Get.toNamed('/dashboard');
 
       //todo: save data in local storage
 
     }
+    print(result.exception.graphqlErrors.first.message);
     update();
   }
 

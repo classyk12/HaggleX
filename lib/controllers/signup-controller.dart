@@ -5,6 +5,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:haggle_clone/commands/commands-queries.dart';
 import 'package:haggle_clone/configiration/qlconfig.dart';
 import 'package:haggle_clone/helpers/mock-values.dart';
+import 'package:haggle_clone/helpers/storage-helper.dart';
 import 'package:haggle_clone/models/countries.dart';
 import 'package:haggle_clone/models/create-user.dart';
 
@@ -56,8 +57,14 @@ class SignUpController extends GetxController {
       response = CreateUserResponse.fromJson(result.data['register']);
 
       //todo: save data in local storage
+      Storage.save('token', response.token);
+      Storage.save('username', response.user.username);
+      print('stored');
+
       Get.toNamed('/verification');
     }
+
+    print(result.exception.graphqlErrors.first.message);
     update();
   }
 

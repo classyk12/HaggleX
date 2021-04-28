@@ -1,5 +1,3 @@
-import 'package:haggle_clone/models/create-user.dart';
-
 class QueryMutation {
   String createUser() {
     return """ 
@@ -70,6 +68,73 @@ class QueryMutation {
   }
 
   String login() {
+    return """ 
+      
+       mutation (\$input: String!,
+       \$password: String!
+    ){
+      login(data: {
+        input: \$input,
+        password: \$password,
+        
+      })
+       {
+        token
+        user{
+          _id
+          email
+          username
+          phonenumber
+          phoneNumberDetails{
+            phoneNumber
+            callingCode
+            flag
+          }
+        
+        }
+         twoFactorAuth
+      }
+    }
+      
+    """;
+  }
+
+  String verifyUser() {
+    return """ 
+      
+    mutation (\$code: Int!
+    ){
+      verifyUser(data: {
+        code: \$code
+      })
+       {
+        token
+        user{
+      _id
+      email
+      phonenumber
+      username
+      kycStatus
+      referralCode    
+        }
+      }
+    }    
+    """;
+  }
+
+  String resendCode() {
+    return """ 
+      query resendVerificationCode(\$email: String!){
+        resendVerificationCode(email:\$email)
+        {
+          resendVerificationCode
+        }
+      }
+      
+    """;
+  }
+
+  String logout() {
     return """ 
       
        mutation (\$input: String!,

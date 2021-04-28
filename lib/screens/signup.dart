@@ -150,7 +150,8 @@ class RegisterScreen extends StatelessWidget {
                                             //   width: 20,
                                             // ),
                                             Expanded(
-                                              child: Text('  (+234)',
+                                              child: Text(
+                                                  '  ${s.selectedCountry.callingCode}',
                                                   style: TextStyle(
                                                       fontSize: 11,
                                                       color: Colors.black)),
@@ -169,7 +170,7 @@ class RegisterScreen extends StatelessWidget {
                                                 controller: _signUpController
                                                     .phoneNumberController,
                                                 keyboardType:
-                                                    TextInputType.text,
+                                                    TextInputType.phone,
                                                 borderColor: Colors.black,
                                                 focusedBorderColor:
                                                     Color(0xffBA3AF9),

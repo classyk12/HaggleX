@@ -78,10 +78,7 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
 
 CreateUserResponse _$CreateUserResponseFromJson(Map<String, dynamic> json) {
   return CreateUserResponse(
-    json['user'] == null
-        ? null
-        : User.fromJson(json['user'] as Map<String, dynamic>),
-    // json['user'] as String,
+    User.fromJson(json['user'] as Map<String, dynamic>),
     json['token'] as String,
   );
 }

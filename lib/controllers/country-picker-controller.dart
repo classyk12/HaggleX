@@ -34,6 +34,7 @@ class CountryPickerController extends GetxController {
       }
       // return countries;
     }
+    print(result.exception.graphqlErrors.first.message);
     update();
   }
 
