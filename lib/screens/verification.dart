@@ -102,6 +102,7 @@ class VerificationScreen extends StatelessWidget {
                         YMargin(20),
                         GetBuilder<VerificationController>(
                             builder: (value) => TextInput(
+                                focusNode: value.focusNode,
                                 controller:
                                     _verificationController.codeController,
                                 keyboardType: TextInputType.number,
@@ -110,7 +111,7 @@ class VerificationScreen extends StatelessWidget {
                                 labelText: "Verification code",
                                 isPassword: false,
                                 textColor: Colors.black,
-                                labelTextColor: Colors.black)),
+                                labelTextColor: value.color)),
                         YMargin(25),
                         Padding(
                           padding: const EdgeInsets.only(

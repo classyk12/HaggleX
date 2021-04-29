@@ -38,22 +38,21 @@ class LoginScreen extends StatelessWidget {
               GetBuilder<LoginController>(
                 builder: (x) {
                   return TextInput(
-                    focusNode: x.focusNode,
-                    controller: _loginController.usernameController,
-                    keyboardType: TextInputType.emailAddress,
-                    borderColor: Colors.white,
-                    focusedBorderColor: Color(0xffBA3AF9),
-                    labelText: "Email Address",
-                    isPassword: false,
-                    textColor: Colors.white,
-                    labelTextColor:
-                        x.focusNode.hasFocus ? Color(0xffBA3AF9) : Colors.white,
-                  );
+                      focusNode: x.focusNode,
+                      controller: _loginController.usernameController,
+                      keyboardType: TextInputType.emailAddress,
+                      borderColor: Colors.white,
+                      focusedBorderColor: Color(0xffBA3AF9),
+                      labelText: "Email Address",
+                      isPassword: false,
+                      textColor: Colors.white,
+                      labelTextColor: x.color);
                 },
               ),
               YMargin(20),
               GetBuilder<LoginController>(
                   builder: (value) => TextInput(
+                      focusNode: value.passwordfocusNode,
                       icon: Icons.remove_red_eye,
                       iconAction: () => value.showPassword(),
                       controller: _loginController.passwordController,
@@ -63,7 +62,7 @@ class LoginScreen extends StatelessWidget {
                       labelText: "Password (Min. 8 characters)",
                       isPassword: value.isPassword,
                       textColor: Colors.white,
-                      labelTextColor: Colors.white)),
+                      labelTextColor: value.passwordStyleColor)),
               Padding(
                 padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
                 child: Align(

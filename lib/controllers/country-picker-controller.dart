@@ -62,6 +62,7 @@ class CountryPickerController extends GetxController {
 
         //persist data in local storage
         Storage.save('countries', json.encode(countries));
+        duplicateItems.addAll(countries);
       } else {
         //handle error
         progress = LoadingProgress.error;

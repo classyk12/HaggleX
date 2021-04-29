@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:haggle_clone/controllers/login-controller.dart';
 import 'package:haggle_clone/controllers/signup-controller.dart';
 import 'package:haggle_clone/helpers/connection-checker.dart';
 import 'package:haggle_clone/utils.dart/margin.dart';
@@ -66,8 +65,7 @@ class RegisterScreen extends StatelessWidget {
                         ),
                         GetBuilder<SignUpController>(
                             builder: (value) => TextInput(
-                                // icon: Icons.remove_red_eye,
-                                //  iconAction: () => value.showPassword(),
+                                focusNode: value.emailfocusNode,
                                 controller: _signUpController.emailController,
                                 keyboardType: TextInputType.emailAddress,
                                 borderColor: Colors.black,
@@ -75,12 +73,10 @@ class RegisterScreen extends StatelessWidget {
                                 labelText: "Email Address",
                                 isPassword: false,
                                 textColor: Colors.black,
-                                labelTextColor: Colors.black)),
+                                labelTextColor: value.emailcolor)),
                         YMargin(15),
                         GetBuilder<SignUpController>(
                             builder: (value) => TextInput(
-                                // icon: Icons.remove_red_eye,
-                                //  iconAction: () => value.showPassword(),
                                 controller:
                                     _signUpController.passwordController,
                                 keyboardType: TextInputType.text,
@@ -89,12 +85,11 @@ class RegisterScreen extends StatelessWidget {
                                 labelText: "Password (Min 8 characters)",
                                 isPassword: true,
                                 textColor: Colors.black,
-                                labelTextColor: Colors.black)),
+                                focusNode: value.passwordfocusNode,
+                                labelTextColor: value.passwordColor)),
                         YMargin(15),
                         GetBuilder<SignUpController>(
                             builder: (value) => TextInput(
-                                // icon: Icons.remove_red_eye,
-                                //  iconAction: () => value.showPassword(),
                                 controller:
                                     _signUpController.userNameController,
                                 keyboardType: TextInputType.text,
@@ -102,8 +97,8 @@ class RegisterScreen extends StatelessWidget {
                                 focusedBorderColor: Color(0xffBA3AF9),
                                 labelText: "Create a username",
                                 isPassword: false,
-                                textColor: Colors.black,
-                                labelTextColor: Colors.black)),
+                                focusNode: value.usernamefocusNode,
+                                labelTextColor: value.usernameColor)),
                         YMargin(15),
                         InkWell(
                           onTap: () => Get.toNamed('/countrycode-picker'),
@@ -155,11 +150,6 @@ class RegisterScreen extends StatelessWidget {
                                                           'country Logo',
                                                       height: 10,
                                                       width: 10),
-                                                  // SvgImage.(
-                                                  //   'assets/images/flag.png',
-                                                  //   height: 20,
-                                                  //   width: 20,
-                                                  // ),
                                                   Expanded(
                                                     child: Text(
                                                         '  (+${s.selectedCountry.callingCode})',
@@ -208,8 +198,8 @@ class RegisterScreen extends StatelessWidget {
                                 focusedBorderColor: Color(0xffBA3AF9),
                                 labelText: "Referral code (optional)",
                                 isPassword: false,
-                                textColor: Colors.black,
-                                labelTextColor: Colors.grey[400])),
+                                focusNode: value.referralfocusNode,
+                                labelTextColor: value.referralColor)),
                         YMargin(15),
                         Padding(
                           padding: const EdgeInsets.only(

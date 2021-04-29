@@ -20,6 +20,16 @@ class SignUpController extends GetxController {
   TextEditingController userNameController;
   CreateUserResponse response;
   GetActiveCountries selectedCountry;
+  FocusNode emailfocusNode;
+  FocusNode passwordfocusNode;
+  FocusNode referralfocusNode;
+  FocusNode usernamefocusNode;
+
+  Color emailcolor = Colors.black;
+  Color passwordColor = Colors.black;
+  Color referralColor = Colors.grey[400];
+  Color usernameColor = Colors.black;
+
   QueryMutation _actions = QueryMutation();
   bool isPassword = true;
 
@@ -30,8 +40,27 @@ class SignUpController extends GetxController {
     phoneNumberController = new TextEditingController();
     userNameController = new TextEditingController();
     selectedCountry = DashBoardMockClass.getDefaultValue();
+    emailfocusNode = new FocusNode();
+    passwordfocusNode = new FocusNode();
+    referralfocusNode = new FocusNode();
+    usernamefocusNode = new FocusNode();
+    emailfocusNode.addListener(_onOnFocusNodeEvent);
+    passwordfocusNode.addListener(_onOnFocusNodeEvent);
+    referralfocusNode.addListener(_onOnFocusNodeEvent);
+    usernamefocusNode.addListener(_onOnFocusNodeEvent);
 
     super.onInit();
+  }
+
+  _onOnFocusNodeEvent() {
+    emailcolor = emailfocusNode.hasFocus ? Color(0xffBA3AF9) : Colors.black;
+    passwordColor =
+        passwordfocusNode.hasFocus ? Color(0xffBA3AF9) : Colors.black;
+    referralColor =
+        referralfocusNode.hasFocus ? Color(0xffBA3AF9) : Colors.grey[400];
+    usernameColor =
+        usernamefocusNode.hasFocus ? Color(0xffBA3AF9) : Colors.black;
+    update();
   }
 
   Future createUser(BuildContext context) async {

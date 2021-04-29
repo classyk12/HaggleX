@@ -14,14 +14,20 @@ class VerificationController extends GetxController {
   SignUpController _signUpController = Get.find();
   FocusNode focusNode;
   QueryMutation _actions = QueryMutation();
+  Color color = Colors.black;
   User response;
 
   @override
   void onInit() {
     codeController = new TextEditingController();
     focusNode = new FocusNode();
-    //_focusNode.addListener(_onOnFocusNodeEvent);
+    focusNode.addListener(_onOnFocusNodeEvent);
     super.onInit();
+  }
+
+  _onOnFocusNodeEvent() {
+    color = focusNode.hasFocus ? Color(0xffBA3AF9) : Colors.black;
+    update();
   }
 
   Future verifyCode(BuildContext context) async {

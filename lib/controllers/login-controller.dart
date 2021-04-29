@@ -15,17 +15,28 @@ class LoginController extends GetxController {
   TextEditingController passwordController;
   bool isPassword = true;
   FocusNode focusNode;
+  FocusNode passwordfocusNode;
   QueryMutation _actions = QueryMutation();
   LoginResponse response;
+  Color color = Colors.white;
+  Color passwordStyleColor = Colors.white;
 
   @override
   void onInit() {
     usernameController = new TextEditingController();
     passwordController = new TextEditingController();
-
     focusNode = new FocusNode();
-    //_focusNode.addListener(_onOnFocusNodeEvent);
+    passwordfocusNode = new FocusNode();
+    focusNode.addListener(_onOnFocusNodeEvent);
+    passwordfocusNode.addListener(_onOnFocusNodeEvent);
     super.onInit();
+  }
+
+  _onOnFocusNodeEvent() {
+    color = focusNode.hasFocus ? Color(0xffBB9FFF) : Colors.white;
+    passwordStyleColor =
+        passwordfocusNode.hasFocus ? Color(0xffBB9FFF) : Colors.white;
+    update();
   }
 
   Future login(BuildContext context) async {
@@ -78,12 +89,16 @@ class LoginController extends GetxController {
     update();
   }
 
+  Color _getInputTextColor() {
+    return focusNode.hasFocus ? Colors.white : Colors.pink;
+  }
+
   //dispose text controllers after use
   @override
   void onClose() {
     usernameController?.dispose();
     passwordController?.dispose();
-    focusNode.dispose();
     super.onClose();
+    focusNode.dispose();
   }
 }
