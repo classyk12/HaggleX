@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 class SearchCountryWidget extends StatefulWidget {
   final TextEditingController searchController;
   final Function(String) onSubmit;
+  final Function(String) onChanged;
 
   SearchCountryWidget(
-      {@required this.searchController, @required this.onSubmit});
+      {@required this.searchController,
+      @required this.onSubmit,
+      @required this.onChanged});
 
   @override
   _SearchState createState() => _SearchState();
@@ -41,6 +44,7 @@ class _SearchState extends State<SearchCountryWidget> {
         cursorColor: Colors.white,
         keyboardType: TextInputType.text,
         controller: widget.searchController,
+        onChanged: widget.onChanged,
         textInputAction: TextInputAction.search,
         onFieldSubmitted: widget.onSubmit,
         decoration: InputDecoration(
