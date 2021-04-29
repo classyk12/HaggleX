@@ -31,7 +31,7 @@ class LoginScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 40, left: 10),
                 child: Text("Welcome!",
                     style: TextStyle(
-                        color: Colors.white,
+                        color: white,
                         fontSize: 40,
                         fontWeight: FontWeight.bold)),
               ),
@@ -41,11 +41,11 @@ class LoginScreen extends StatelessWidget {
                       focusNode: x.focusNode,
                       controller: _loginController.usernameController,
                       keyboardType: TextInputType.emailAddress,
-                      borderColor: Colors.white,
-                      focusedBorderColor: Color(0xffBA3AF9),
+                      borderColor: white,
+                      focusedBorderColor: secondaryPurple,
                       labelText: "Email Address",
                       isPassword: false,
-                      textColor: Colors.white,
+                      textColor: white,
                       labelTextColor: x.color);
                 },
               ),
@@ -57,11 +57,11 @@ class LoginScreen extends StatelessWidget {
                       iconAction: () => value.showPassword(),
                       controller: _loginController.passwordController,
                       keyboardType: TextInputType.text,
-                      borderColor: Colors.white,
-                      focusedBorderColor: Color(0xffBA3AF9),
+                      borderColor: white,
+                      focusedBorderColor: secondaryPurple,
                       labelText: "Password (Min. 8 characters)",
                       isPassword: value.isPassword,
-                      textColor: Colors.white,
+                      textColor: white,
                       labelTextColor: value.passwordStyleColor)),
               Padding(
                 padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
@@ -71,8 +71,7 @@ class LoginScreen extends StatelessWidget {
                     child: FlatButton(
                         onPressed: () => null,
                         child: Text("Forgot Password?",
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 12)))),
+                            style: TextStyle(color: white, fontSize: 12)))),
               ),
               Padding(
                 padding:
@@ -98,7 +97,7 @@ class LoginScreen extends StatelessWidget {
                           child: Text(
                             "New User? Create a new account",
                             style: TextStyle(
-                                color: Colors.white,
+                                color: white,
                                 fontWeight: FontWeight.normal,
                                 fontSize: 12),
                           ),

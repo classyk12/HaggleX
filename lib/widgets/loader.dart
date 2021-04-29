@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:haggle_clone/utils.dart/themes.dart';
 import 'package:haggle_clone/widgets/animated-logo.dart';
 
 class ImageLoader extends StatelessWidget {
@@ -23,7 +24,7 @@ class ImageLoader extends StatelessWidget {
               children: <Widget>[
                 SafeArea(
                   child: Container(
-                    color: overlayColor ?? Color(0xFF2E1963).withOpacity(0.5),
+                    color: overlayColor ?? primaryPurple.withOpacity(0.5),
                   ),
                 ),
                 Center(
@@ -38,8 +39,7 @@ class ImageLoader extends StatelessWidget {
                       Text(
                         loaderText,
                         style: Theme.of(context).textTheme.bodyText1.copyWith(
-                            color: Colors.white,
-                            decoration: TextDecoration.none),
+                            color: white, decoration: TextDecoration.none),
                       )
                     ],
                   ),

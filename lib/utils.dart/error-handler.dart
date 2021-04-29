@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:haggle_clone/utils.dart/themes.dart';
 import 'package:haggle_clone/widgets/error-widget.dart';
 
 class ErrorHandler {
@@ -45,7 +46,7 @@ class ErrorHandler {
               title: "Something went wrong",
               body: error,
               icon: Icon(Icons.error)),
-          backgroundColor: Colors.white,
+          backgroundColor: white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
                 topRight: Radius.circular(30), topLeft: Radius.circular(30)),

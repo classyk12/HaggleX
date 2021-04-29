@@ -27,11 +27,11 @@ class Validators {
           message:
               'enter a valid password - 8 characters minimum for password)');
     }
-    if (!phoneNumber.isPhoneNumber || password.length < 10) {
+    if (!phoneNumber.isPhoneNumber || phoneNumber.length < 10) {
       return ValidateFormResponse(
           status: false,
           message:
-              'enter a valid phone number - 8 characters minimum for phone numbers)');
+              'enter a valid phone number - 10 characters minimum for phone numbers)');
     }
     if (userName.isEmpty || userName.length < 3) {
       return ValidateFormResponse(

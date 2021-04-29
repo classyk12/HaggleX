@@ -6,6 +6,7 @@ import 'package:haggle_clone/controllers/signup-controller.dart';
 import 'package:haggle_clone/helpers/connection-checker.dart';
 import 'package:haggle_clone/utils.dart/margin.dart';
 import 'package:haggle_clone/utils.dart/text-input.dart';
+import 'package:haggle_clone/utils.dart/themes.dart';
 import 'package:haggle_clone/widgets/button.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -48,7 +49,7 @@ class RegisterScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15.0),
                 ),
                 elevation: 10,
-                color: Colors.white,
+                color: white,
                 child: Padding(
                   padding:
                       const EdgeInsets.only(left: 12.0, right: 10, bottom: 10),
@@ -68,11 +69,11 @@ class RegisterScreen extends StatelessWidget {
                                 focusNode: value.emailfocusNode,
                                 controller: _signUpController.emailController,
                                 keyboardType: TextInputType.emailAddress,
-                                borderColor: Colors.black,
-                                focusedBorderColor: Color(0xffBA3AF9),
+                                borderColor: black,
+                                focusedBorderColor: secondaryPurple,
                                 labelText: "Email Address",
                                 isPassword: false,
-                                textColor: Colors.black,
+                                textColor: black,
                                 labelTextColor: value.emailcolor)),
                         YMargin(15),
                         GetBuilder<SignUpController>(
@@ -80,11 +81,11 @@ class RegisterScreen extends StatelessWidget {
                                 controller:
                                     _signUpController.passwordController,
                                 keyboardType: TextInputType.text,
-                                borderColor: Colors.black,
-                                focusedBorderColor: Color(0xffBA3AF9),
+                                borderColor: black,
+                                focusedBorderColor: secondaryPurple,
                                 labelText: "Password (Min 8 characters)",
                                 isPassword: true,
-                                textColor: Colors.black,
+                                textColor: black,
                                 focusNode: value.passwordfocusNode,
                                 labelTextColor: value.passwordColor)),
                         YMargin(15),
@@ -93,8 +94,8 @@ class RegisterScreen extends StatelessWidget {
                                 controller:
                                     _signUpController.userNameController,
                                 keyboardType: TextInputType.text,
-                                borderColor: Colors.black,
-                                focusedBorderColor: Color(0xffBA3AF9),
+                                borderColor: black,
+                                focusedBorderColor: secondaryPurple,
                                 labelText: "Create a username",
                                 isPassword: false,
                                 focusNode: value.usernamefocusNode,
@@ -148,15 +149,14 @@ class RegisterScreen extends StatelessWidget {
                                                               ),
                                                       semanticsLabel:
                                                           'country Logo',
-                                                      height: 10,
-                                                      width: 10),
+                                                      height: 9,
+                                                      width: 9),
                                                   Expanded(
                                                     child: Text(
                                                         '  (+${s.selectedCountry.callingCode})',
                                                         style: TextStyle(
-                                                            fontSize: 11,
-                                                            color:
-                                                                Colors.black)),
+                                                            fontSize: 9,
+                                                            color: black)),
                                                   )
                                                 ],
                                               ),
@@ -176,14 +176,14 @@ class RegisterScreen extends StatelessWidget {
                                                     .phoneNumberController,
                                                 keyboardType:
                                                     TextInputType.phone,
-                                                borderColor: Colors.black,
+                                                borderColor: black,
                                                 focusedBorderColor:
-                                                    Color(0xffBA3AF9),
+                                                    secondaryPurple,
                                                 labelText:
                                                     "Enter your phone number",
                                                 isPassword: false,
-                                                textColor: Colors.black,
-                                                labelTextColor: Colors.black),
+                                                textColor: black,
+                                                labelTextColor: black),
                                           ),
                                         )),
                               ]),
@@ -194,8 +194,8 @@ class RegisterScreen extends StatelessWidget {
                                 controller:
                                     _signUpController.referralCodeController,
                                 keyboardType: TextInputType.text,
-                                borderColor: Colors.black,
-                                focusedBorderColor: Color(0xffBA3AF9),
+                                borderColor: black,
+                                focusedBorderColor: secondaryPurple,
                                 labelText: "Referral code (optional)",
                                 isPassword: false,
                                 focusNode: value.referralfocusNode,
@@ -214,7 +214,7 @@ class RegisterScreen extends StatelessWidget {
                               padding: const EdgeInsets.only(
                                   left: 20.0, right: 15, bottom: 25),
                               child: Button(
-                                buttonColor: Colors.white,
+                                buttonColor: white,
                                 decoration: BoxDecoration(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10)),
@@ -248,7 +248,7 @@ class RegisterScreen extends StatelessWidget {
                                   Text(
                                     "New User? Create a new account",
                                     style: TextStyle(
-                                        color: Colors.white,
+                                        color: white,
                                         fontWeight: FontWeight.normal,
                                         fontSize: 11),
                                   ),

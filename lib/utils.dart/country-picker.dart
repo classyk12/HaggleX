@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:haggle_clone/utils.dart/themes.dart';
 
 class SearchCountryWidget extends StatefulWidget {
   final TextEditingController searchController;
@@ -18,7 +19,6 @@ class _SearchState extends State<SearchCountryWidget> {
   bool searchEmpty = true;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     widget.searchController.addListener(() {
       if (widget.searchController.text.isEmpty) {
@@ -40,8 +40,8 @@ class _SearchState extends State<SearchCountryWidget> {
       // height: Get.height * 0.3,
 //      padding: EdgeInsets.only(left: 16, right: 16),
       child: TextFormField(
-        style: TextStyle(color: Colors.white),
-        cursorColor: Colors.white,
+        style: TextStyle(color: white),
+        cursorColor: white,
         keyboardType: TextInputType.text,
         controller: widget.searchController,
         onChanged: widget.onChanged,
@@ -53,7 +53,7 @@ class _SearchState extends State<SearchCountryWidget> {
           hintStyle: TextStyle(
               fontSize: 10,
               fontFamily: 'BasisGrotesquePro',
-              color: Colors.white.withOpacity(0.7),
+              color: white.withOpacity(0.7),
               fontWeight: FontWeight.w400),
           fillColor: Color(0xffFFFFFF).withOpacity(0.2),
           filled: true,
@@ -71,7 +71,7 @@ class _SearchState extends State<SearchCountryWidget> {
                   },
                   child: Icon(
                     Icons.clear,
-                    color: Colors.white,
+                    color: white,
                     size: 20,
                   )),
           border: OutlineInputBorder(

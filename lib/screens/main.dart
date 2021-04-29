@@ -3,18 +3,19 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:haggle_clone/screens/countrypicker.dart';
+import 'package:haggle_clone/screens/dashboard.dart';
 import 'package:haggle_clone/screens/login.dart';
 import 'package:haggle_clone/screens/setup-complete.dart';
 import 'package:haggle_clone/screens/signup.dart';
 import 'package:haggle_clone/screens/splash_screen.dart';
-import 'package:haggle_clone/screens/tabs-page.dart';
 import 'package:haggle_clone/screens/verification.dart';
+import 'package:haggle_clone/utils.dart/themes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: Color(0xFF2E1963),
+    statusBarColor: primaryPurple,
     statusBarBrightness: Brightness.dark,
   ));
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
@@ -32,8 +33,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        theme: ThemeData(
-            fontFamily: 'BasisGrotesquePro', primaryColor: Colors.white),
+        theme: ThemeData(fontFamily: 'BasisGrotesquePro', primaryColor: white),
         debugShowCheckedModeBanner: false,
         title: 'HaggleX',
         initialRoute: '/splash',
@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
           ),
           GetPage(
             name: '/dashboard',
-            page: () => TabsPage(),
+            page: () => DashboardScreen(),
           ),
           GetPage(
             name: '/countrycode-picker',

@@ -32,13 +32,11 @@ class SetUpCompleteScreen extends StatelessWidget {
               YMargin(10),
               Text("Setup Complete",
                   style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold)),
+                      color: white, fontSize: 16, fontWeight: FontWeight.bold)),
               YMargin(20),
               Text("Thank you for setting up your HaggleX account",
                   style: TextStyle(
-                      color: Colors.white,
+                      color: white,
                       fontSize: 10,
                       fontWeight: FontWeight.normal)),
               //  YMargin(15),

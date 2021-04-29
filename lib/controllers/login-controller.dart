@@ -7,6 +7,7 @@ import 'package:haggle_clone/configiration/qlconfig.dart';
 import 'package:haggle_clone/helpers/storage-helper.dart';
 import 'package:haggle_clone/helpers/validators.dart';
 import 'package:haggle_clone/models/login.dart';
+import 'package:haggle_clone/utils.dart/themes.dart';
 import 'package:haggle_clone/widgets/common.dart';
 import 'package:haggle_clone/widgets/loader.dart';
 
@@ -18,8 +19,8 @@ class LoginController extends GetxController {
   FocusNode passwordfocusNode;
   QueryMutation _actions = QueryMutation();
   LoginResponse response;
-  Color color = Colors.white;
-  Color passwordStyleColor = Colors.white;
+  Color color = white;
+  Color passwordStyleColor = white;
 
   @override
   void onInit() {
@@ -33,9 +34,8 @@ class LoginController extends GetxController {
   }
 
   _onOnFocusNodeEvent() {
-    color = focusNode.hasFocus ? Color(0xffBB9FFF) : Colors.white;
-    passwordStyleColor =
-        passwordfocusNode.hasFocus ? Color(0xffBB9FFF) : Colors.white;
+    color = focusNode.hasFocus ? Color(0xffBB9FFF) : white;
+    passwordStyleColor = passwordfocusNode.hasFocus ? Color(0xffBB9FFF) : white;
     update();
   }
 
@@ -87,10 +87,6 @@ class LoginController extends GetxController {
   showPassword() {
     this.isPassword = !this.isPassword;
     update();
-  }
-
-  Color _getInputTextColor() {
-    return focusNode.hasFocus ? Colors.white : Colors.pink;
   }
 
   //dispose text controllers after use

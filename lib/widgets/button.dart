@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haggle_clone/utils.dart/margin.dart';
+import 'package:haggle_clone/utils.dart/themes.dart';
 
 class Button extends StatelessWidget {
   final String text;
@@ -31,7 +32,7 @@ class Button extends StatelessWidget {
       // ignore: deprecated_member_use
       child: FlatButton(
         color: this.color,
-        // splashColor: Colors.white.withOpacity(0.2),
+        // splashColor: white.withOpacity(0.2),
         // elevation: 8,
         onPressed: onPressed,
         child: Padding(
@@ -41,7 +42,7 @@ class Button extends StatelessWidget {
             style: TextStyle(
                 fontSize: this.fontSize,
                 fontWeight: FontWeight.bold,
-                color: this.buttonColor ?? Colors.black),
+                color: this.buttonColor ?? black),
           ),
         ),
         shape: RoundedRectangleBorder(

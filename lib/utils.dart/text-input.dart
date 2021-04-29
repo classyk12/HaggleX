@@ -83,15 +83,15 @@ class _TextInputState extends State<TextInput> {
                     child: Icon(this.widget.icon,
                         size: 25,
                         color: this.widget.isPassword
-                            ? Color(0xffBA3AF9).withOpacity(0.4)
-                            : Colors.white),
+                            ? secondaryPurple.withOpacity(0.4)
+                            : white),
                     onTap: this.widget.iconAction,
                   ) ??
                   null,
               enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
                           width: this.widget.borderWidth ?? 1.0,
-                          color: this.widget.borderColor ?? Colors.black)) ??
+                          color: this.widget.borderColor ?? black)) ??
                   null,
               focusedBorder: UnderlineInputBorder(
                   borderSide:

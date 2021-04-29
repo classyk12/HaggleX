@@ -5,6 +5,7 @@ import 'package:haggle_clone/controllers/verification-controller.dart';
 import 'package:haggle_clone/helpers/connection-checker.dart';
 import 'package:haggle_clone/utils.dart/margin.dart';
 import 'package:haggle_clone/utils.dart/text-input.dart';
+import 'package:haggle_clone/utils.dart/themes.dart';
 import 'package:haggle_clone/widgets/button.dart';
 
 class VerificationScreen extends StatelessWidget {
@@ -44,9 +45,7 @@ class VerificationScreen extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 30, left: 15, top: 30),
               child: Text("Verify your account!",
                   style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 23,
-                      fontWeight: FontWeight.bold)),
+                      color: white, fontSize: 23, fontWeight: FontWeight.bold)),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 15.0, bottom: 50),
@@ -56,7 +55,7 @@ class VerificationScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15.0),
                 ),
                 elevation: 10,
-                color: Colors.white,
+                color: white,
                 child: Padding(
                   padding:
                       const EdgeInsets.only(left: 12.0, right: 10, bottom: 10),
@@ -84,7 +83,7 @@ class VerificationScreen extends StatelessWidget {
                                   style: TextStyle(
                                       fontWeight: FontWeight.normal,
                                       fontSize: 12,
-                                      color: Colors.black,
+                                      color: black,
                                       fontFamily: 'BasisGrotesquePro'),
                                   children: <TextSpan>[
                                     TextSpan(
@@ -92,7 +91,7 @@ class VerificationScreen extends StatelessWidget {
                                       style: TextStyle(
                                           fontWeight: FontWeight.normal,
                                           fontSize: 12,
-                                          color: Colors.black,
+                                          color: black,
                                           fontFamily: 'BasisGrotesquePro'),
                                     ),
                                   ],
@@ -106,18 +105,18 @@ class VerificationScreen extends StatelessWidget {
                                 controller:
                                     _verificationController.codeController,
                                 keyboardType: TextInputType.number,
-                                borderColor: Colors.black,
-                                focusedBorderColor: Colors.black,
+                                borderColor: black,
+                                focusedBorderColor: black,
                                 labelText: "Verification code",
                                 isPassword: false,
-                                textColor: Colors.black,
+                                textColor: black,
                                 labelTextColor: value.color)),
                         YMargin(25),
                         Padding(
                           padding: const EdgeInsets.only(
                               left: 20.0, right: 15, bottom: 25),
                           child: Button(
-                            buttonColor: Colors.white,
+                            buttonColor: white,
                             decoration: BoxDecoration(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10)),

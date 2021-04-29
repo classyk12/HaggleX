@@ -9,6 +9,7 @@ import 'package:haggle_clone/helpers/storage-helper.dart';
 import 'package:haggle_clone/helpers/validators.dart';
 import 'package:haggle_clone/models/countries.dart';
 import 'package:haggle_clone/models/create-user.dart';
+import 'package:haggle_clone/utils.dart/themes.dart';
 import 'package:haggle_clone/widgets/common.dart';
 import 'package:haggle_clone/widgets/loader.dart';
 
@@ -25,10 +26,10 @@ class SignUpController extends GetxController {
   FocusNode referralfocusNode;
   FocusNode usernamefocusNode;
 
-  Color emailcolor = Colors.black;
-  Color passwordColor = Colors.black;
+  Color emailcolor = black;
+  Color passwordColor = black;
   Color referralColor = Colors.grey[400];
-  Color usernameColor = Colors.black;
+  Color usernameColor = black;
 
   QueryMutation _actions = QueryMutation();
   bool isPassword = true;
@@ -53,13 +54,11 @@ class SignUpController extends GetxController {
   }
 
   _onOnFocusNodeEvent() {
-    emailcolor = emailfocusNode.hasFocus ? Color(0xffBA3AF9) : Colors.black;
-    passwordColor =
-        passwordfocusNode.hasFocus ? Color(0xffBA3AF9) : Colors.black;
+    emailcolor = emailfocusNode.hasFocus ? secondaryPurple : black;
+    passwordColor = passwordfocusNode.hasFocus ? secondaryPurple : black;
     referralColor =
-        referralfocusNode.hasFocus ? Color(0xffBA3AF9) : Colors.grey[400];
-    usernameColor =
-        usernamefocusNode.hasFocus ? Color(0xffBA3AF9) : Colors.black;
+        referralfocusNode.hasFocus ? secondaryPurple : Colors.grey[400];
+    usernameColor = usernamefocusNode.hasFocus ? secondaryPurple : black;
     update();
   }
 

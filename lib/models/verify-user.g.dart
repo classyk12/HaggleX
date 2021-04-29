@@ -11,8 +11,3 @@ ResendCodeResponse _$VerifyUserResponseFromJson(Map<String, dynamic> json) {
     json['resendVerificationCode'] as bool,
   );
 }
-
-Map<String, dynamic> _$ResendCodeResponseToJson(ResendCodeResponse instance) =>
-    <String, dynamic>{
-      'resendVerificationCode': instance.resendVerificationCode,
-    };

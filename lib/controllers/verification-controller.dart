@@ -6,6 +6,7 @@ import 'package:haggle_clone/commands/commands-queries.dart';
 import 'package:haggle_clone/configiration/qlconfig.dart';
 import 'package:haggle_clone/controllers/signup-controller.dart';
 import 'package:haggle_clone/models/create-user.dart';
+import 'package:haggle_clone/utils.dart/themes.dart';
 import 'package:haggle_clone/widgets/common.dart';
 import 'package:haggle_clone/widgets/loader.dart';
 
@@ -14,7 +15,7 @@ class VerificationController extends GetxController {
   SignUpController _signUpController = Get.find();
   FocusNode focusNode;
   QueryMutation _actions = QueryMutation();
-  Color color = Colors.black;
+  Color color = black;
   User response;
 
   @override
@@ -26,7 +27,7 @@ class VerificationController extends GetxController {
   }
 
   _onOnFocusNodeEvent() {
-    color = focusNode.hasFocus ? Color(0xffBA3AF9) : Colors.black;
+    color = focusNode.hasFocus ? secondaryPurple : black;
     update();
   }
 

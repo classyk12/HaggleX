@@ -19,7 +19,7 @@ class CountryPickerScreen extends StatelessWidget {
     return Scaffold(
       body: Container(
           decoration: BoxDecoration(
-            color: Color(0xff2E1963),
+            color: primaryPurple,
           ),
           child: ListView(
             children: [
@@ -72,10 +72,10 @@ class CountryPickerScreen extends StatelessWidget {
                           children: [
                             YMargin(Get.height * 0.4),
                             CircularProgressIndicator.adaptive(
-                                backgroundColor: Colors.white),
+                                backgroundColor: white),
                             Text('Loading countries',
                                 style: TextStyle(
-                                    color: Colors.white,
+                                    color: white,
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold))
                           ]),
@@ -111,7 +111,7 @@ class CountryPickerScreen extends StatelessWidget {
                                                 width: 10,
                                                 child:
                                                     CircularProgressIndicator(
-                                                  backgroundColor: Colors.white,
+                                                  backgroundColor: white,
                                                   strokeWidth: 1,
                                                 ),
                                               ),
@@ -124,8 +124,7 @@ class CountryPickerScreen extends StatelessWidget {
                                       Text(
                                           '  (+${_pickerController.countries[i].callingCode})  ${_pickerController.countries[i].name}',
                                           style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 12))
+                                              color: white, fontSize: 12))
                                     ]),
                               ),
                             );
@@ -141,7 +140,7 @@ class CountryPickerScreen extends StatelessWidget {
                             YMargin(Get.height * 0.4),
                             Text('An Error occured while retriving data...',
                                 style: TextStyle(
-                                    color: Colors.white,
+                                    color: white,
                                     fontSize: 12,
                                     fontWeight: FontWeight.bold)),
                             YMargin(15),

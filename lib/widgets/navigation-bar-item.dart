@@ -34,6 +34,24 @@ class TabNavigationItem {
         ),
         TabNavigationItem(
           page: DashboardScreen(),
+          // icon: FloatingActionButton(
+          //   onPressed: () {},
+          //   child: Align(
+          //     child: FloatingActionButton(
+          //       child: Image.asset(
+          //         'assets/icons/otc.png',
+          //         height: 50,
+          //         width: 70,
+          //         fit: BoxFit.fill,
+          //       ),
+          //       backgroundColor: Colors.transparent,
+          //       elevation: 0,
+          //       onPressed: () {},
+          //     ),
+          //     alignment: Alignment(0, 1.22),
+          //   ),
+          // ),
+
           icon: Center(
             child: Image.asset(
               'assets/images/OTC.png',
