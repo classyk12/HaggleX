@@ -61,6 +61,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     onTap: () {
                                       Storage.remove('token');
                                       Storage.remove('username');
+                                      Storage.remove('countries');
                                       Get.offAllNamed('/login');
                                     },
                                     child: Row(

@@ -3,8 +3,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:haggle_clone/controllers/country-picker-controller.dart';
 import 'package:haggle_clone/controllers/signup-controller.dart';
+import 'package:haggle_clone/helpers/connection-checker.dart';
 import 'package:haggle_clone/utils.dart/country-picker.dart';
 import 'package:haggle_clone/utils.dart/margin.dart';
+import 'package:haggle_clone/utils.dart/themes.dart';
+import 'package:haggle_clone/widgets/button.dart';
 
 class CountryPickerScreen extends StatelessWidget {
   final SignUpController _signUpController = Get.find();
@@ -38,7 +41,7 @@ class CountryPickerScreen extends StatelessWidget {
                       ),
                     );
                   } else {
-                    return Text('failed');
+                    return Container();
                   }
                 },
               ),
@@ -54,7 +57,7 @@ class CountryPickerScreen extends StatelessWidget {
                           color: Colors.grey[500].withOpacity(0.2)),
                     );
                   } else {
-                    return Text('failed again');
+                    return Container();
                   }
                 },
               ),
@@ -130,9 +133,30 @@ class CountryPickerScreen extends StatelessWidget {
                     );
                   } else {
                     return Container(
-                        color: Colors.red,
-                        height: Get.height * 0.2,
-                        child: Text('failed'));
+                      alignment: Alignment.center,
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            YMargin(Get.height * 0.4),
+                            Text('An Error occured while retriving data...',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold)),
+                            YMargin(15),
+                            Button(
+                                text: 'try again',
+                                onPressed: () {
+                                  InternetHelper.checkInternet(
+                                      function: () =>
+                                          _pickerController.retry());
+                                },
+                                width: Get.width * 0.5,
+                                height: Get.height * 0.07,
+                                color: buttonYellow)
+                          ]),
+                    );
                   }
                 },
               )
