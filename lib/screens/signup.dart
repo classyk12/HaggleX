@@ -1,13 +1,16 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:haggle_clone/controllers/login-controller.dart';
+import 'package:haggle_clone/controllers/signup-controller.dart';
+import 'package:haggle_clone/helpers/connection-checker.dart';
 import 'package:haggle_clone/utils.dart/margin.dart';
 import 'package:haggle_clone/utils.dart/text-input.dart';
+import 'package:haggle_clone/utils.dart/themes.dart';
 import 'package:haggle_clone/widgets/button.dart';
 
 class RegisterScreen extends StatelessWidget {
-  final LoginController _loginController = Get.put(LoginController());
+  final SignUpController _signUpController = Get.put(SignUpController());
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +49,7 @@ class RegisterScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(15.0),
                 ),
                 elevation: 10,
-                color: Colors.white,
+                color: white,
                 child: Padding(
                   padding:
                       const EdgeInsets.only(left: 12.0, right: 10, bottom: 10),
@@ -61,44 +64,42 @@ class RegisterScreen extends StatelessWidget {
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 16)),
                         ),
-                        GetBuilder<LoginController>(
+                        GetBuilder<SignUpController>(
                             builder: (value) => TextInput(
-                                // icon: Icons.remove_red_eye,
-                                //  iconAction: () => value.showPassword(),
-                                controller: _loginController.passwordController,
-                                keyboardType: TextInputType.text,
-                                borderColor: Colors.black,
-                                focusedBorderColor: Color(0xffBA3AF9),
+                                focusNode: value.emailfocusNode,
+                                controller: _signUpController.emailController,
+                                keyboardType: TextInputType.emailAddress,
+                                borderColor: black,
+                                focusedBorderColor: secondaryPurple,
                                 labelText: "Email Address",
                                 isPassword: false,
-                                textColor: Colors.black,
-                                labelTextColor: Colors.black)),
+                                textColor: black,
+                                labelTextColor: value.emailcolor)),
                         YMargin(15),
-                        GetBuilder<LoginController>(
+                        GetBuilder<SignUpController>(
                             builder: (value) => TextInput(
-                                // icon: Icons.remove_red_eye,
-                                //  iconAction: () => value.showPassword(),
-                                controller: _loginController.passwordController,
+                                controller:
+                                    _signUpController.passwordController,
                                 keyboardType: TextInputType.text,
-                                borderColor: Colors.black,
-                                focusedBorderColor: Color(0xffBA3AF9),
-                                labelText: "Password (Min. 8 characters)",
-                                isPassword: false,
-                                textColor: Colors.black,
-                                labelTextColor: Colors.black)),
+                                borderColor: black,
+                                focusedBorderColor: secondaryPurple,
+                                labelText: "Password (Min 8 characters)",
+                                isPassword: true,
+                                textColor: black,
+                                focusNode: value.passwordfocusNode,
+                                labelTextColor: value.passwordColor)),
                         YMargin(15),
-                        GetBuilder<LoginController>(
+                        GetBuilder<SignUpController>(
                             builder: (value) => TextInput(
-                                // icon: Icons.remove_red_eye,
-                                //  iconAction: () => value.showPassword(),
-                                controller: _loginController.passwordController,
+                                controller:
+                                    _signUpController.userNameController,
                                 keyboardType: TextInputType.text,
-                                borderColor: Colors.black,
-                                focusedBorderColor: Color(0xffBA3AF9),
+                                borderColor: black,
+                                focusedBorderColor: secondaryPurple,
                                 labelText: "Create a username",
                                 isPassword: false,
-                                textColor: Colors.black,
-                                labelTextColor: Colors.black)),
+                                focusNode: value.usernamefocusNode,
+                                labelTextColor: value.usernameColor)),
                         YMargin(15),
                         InkWell(
                           onTap: () => Get.toNamed('/countrycode-picker'),
@@ -107,68 +108,98 @@ class RegisterScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 XMargin(10),
-                                Container(
-                                  width: Get.width * 0.2,
-                                  decoration: BoxDecoration(
-                                      color: Color(0xffE8E8E8),
-                                      border:
-                                          Border.all(color: Colors.grey[400])),
+                                Column(
+                                  children: [
+                                    YMargin(15),
+                                    Container(
+                                      width: Get.width * 0.2,
+                                      decoration: BoxDecoration(
+                                          color: Color(0xffE8E8E8),
+                                          borderRadius:
+                                              BorderRadius.circular(2),
+                                          border: Border.all(
+                                              color: Colors.grey[400])),
 
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Image.asset(
-                                          'assets/images/flag.png',
-                                          height: 20,
-                                          width: 20,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(10),
+                                        child: GetBuilder<SignUpController>(
+                                          builder: (s) {
+                                            return Center(
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  SvgPicture.network(
+                                                      s.selectedCountry.flag,
+                                                      placeholderBuilder:
+                                                          (context) =>
+                                                              Container(
+                                                                height: 10,
+                                                                width: 10,
+                                                                child:
+                                                                    CircularProgressIndicator(
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .white,
+                                                                  strokeWidth:
+                                                                      1,
+                                                                ),
+                                                              ),
+                                                      semanticsLabel:
+                                                          'country Logo',
+                                                      height: 9,
+                                                      width: 9),
+                                                  Expanded(
+                                                    child: Text(
+                                                        '  (+${s.selectedCountry.callingCode})',
+                                                        style: TextStyle(
+                                                            fontSize: 9,
+                                                            color: black)),
+                                                  )
+                                                ],
+                                              ),
+                                            );
+                                          },
                                         ),
-                                        Expanded(
-                                          child: Text('  (+234)',
-                                              style: TextStyle(
-                                                  fontSize: 11,
-                                                  color: Colors.black)),
-                                        )
-                                      ],
+                                      ), //#0000001A
                                     ),
-                                  ), //#0000001A
+                                  ],
                                 ),
-                                GetBuilder<LoginController>(
+                                GetBuilder<SignUpController>(
                                     builder: (value) => Expanded(
                                           child: SizedBox(
                                             width: Get.width * 0.7,
                                             child: TextInput(
-                                                controller: _loginController
-                                                    .passwordController,
+                                                controller: _signUpController
+                                                    .phoneNumberController,
                                                 keyboardType:
-                                                    TextInputType.text,
-                                                borderColor: Colors.black,
+                                                    TextInputType.phone,
+                                                borderColor: black,
                                                 focusedBorderColor:
-                                                    Color(0xffBA3AF9),
+                                                    secondaryPurple,
                                                 labelText:
                                                     "Enter your phone number",
                                                 isPassword: false,
-                                                textColor: Colors.black,
-                                                labelTextColor: Colors.black),
+                                                textColor: black,
+                                                labelTextColor: black),
                                           ),
                                         )),
                               ]),
                         ),
                         YMargin(20),
-                        GetBuilder<LoginController>(
+                        GetBuilder<SignUpController>(
                             builder: (value) => TextInput(
-                                controller: _loginController.passwordController,
+                                controller:
+                                    _signUpController.referralCodeController,
                                 keyboardType: TextInputType.text,
-                                borderColor: Colors.black,
-                                focusedBorderColor: Color(0xffBA3AF9),
+                                borderColor: black,
+                                focusedBorderColor: secondaryPurple,
                                 labelText: "Referral code (optional)",
                                 isPassword: false,
-                                textColor: Colors.black,
-                                labelTextColor: Colors.grey[400])),
+                                focusNode: value.referralfocusNode,
+                                labelTextColor: value.referralColor)),
                         YMargin(15),
                         Padding(
                           padding: const EdgeInsets.only(
@@ -177,33 +208,36 @@ class RegisterScreen extends StatelessWidget {
                               'By signing, you agree to HaggleX terms and privacy policy.',
                               style: TextStyle(fontSize: 11)),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 20.0, right: 15, bottom: 25),
-                          child: Button(
-                            buttonColor: Colors.white,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              gradient: LinearGradient(
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
-                                colors: [
-                                  Color(0xFF432B7B),
-                                  Color(0xFF6A4BBC),
-                                ],
-                              ),
-                            ),
-                            text: 'SIGN UP',
+                        GetBuilder<SignUpController>(
+                          builder: (x) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 20.0, right: 15, bottom: 25),
+                              child: Button(
+                                buttonColor: white,
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10)),
+                                  gradient: LinearGradient(
+                                    begin: Alignment.centerLeft,
+                                    end: Alignment.centerRight,
+                                    colors: [
+                                      Color(0xFF432B7B),
+                                      Color(0xFF6A4BBC),
+                                    ],
+                                  ),
+                                ),
+                                text: 'SIGN UP',
 
-                            onPressed: () {
-                              Get.toNamed('/verification');
-                              // InternetHelper.checkInternet(
-                              //     function: () => _loginController.login());
-                            },
-                            //width: Get.width * 0.8,
-                            height: Get.height * 0.07,
-                          ),
+                                onPressed: () {
+                                  InternetHelper.checkInternet(
+                                      function: () => x.createUser(context));
+                                },
+                                //width: Get.width * 0.8,
+                                height: Get.height * 0.07,
+                              ),
+                            );
+                          },
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 10),
@@ -214,7 +248,7 @@ class RegisterScreen extends StatelessWidget {
                                   Text(
                                     "New User? Create a new account",
                                     style: TextStyle(
-                                        color: Colors.white,
+                                        color: white,
                                         fontWeight: FontWeight.normal,
                                         fontSize: 11),
                                   ),

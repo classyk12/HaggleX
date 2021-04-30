@@ -34,10 +34,12 @@ class TabNavigationItem {
         ),
         TabNavigationItem(
           page: DashboardScreen(),
-          icon: Image.asset(
-            'assets/images/OTC.png',
-            height: 50,
-            width: 50,
+          icon: Center(
+            child: Image.asset(
+              'assets/images/OTC.png',
+              height: 50,
+              width: 50,
+            ),
           ),
           title: '',
         ),

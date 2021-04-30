@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
+import 'package:haggle_clone/helpers/storage-helper.dart';
 import 'package:haggle_clone/utils.dart/margin.dart';
+import 'package:haggle_clone/utils.dart/themes.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -13,7 +15,12 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds: 2), () async {
-      Get.offNamed('/login');
+      var token = Storage.read('token');
+      if (token != null) {
+        Get.offNamed('/dashboard');
+      } else {
+        Get.offNamed('/login');
+      }
     });
   }
 
@@ -36,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   YMargin(30),
                   Text('HaggleX',
                       style: TextStyle(
-                          color: Colors.white,
+                          color: white,
                           fontSize: 23,
                           fontWeight: FontWeight.bold,
                           decoration: TextDecoration.none,

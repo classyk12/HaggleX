@@ -59,6 +59,8 @@ class _TextInputState extends State<TextInput> {
           keyboardType: this.widget.keyboardType,
           style: TextStyle(color: this.widget.textColor, fontSize: 16),
           decoration: InputDecoration(
+              fillColor: Colors.transparent,
+              filled: true,
               labelText: this.widget.labelText ?? null,
               labelStyle: TextStyle(
                   color: this.widget.labelTextColor,
@@ -81,15 +83,15 @@ class _TextInputState extends State<TextInput> {
                     child: Icon(this.widget.icon,
                         size: 25,
                         color: this.widget.isPassword
-                            ? Colors.grey
-                            : primaryGreen),
+                            ? secondaryPurple.withOpacity(0.4)
+                            : white),
                     onTap: this.widget.iconAction,
                   ) ??
                   null,
               enabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
                           width: this.widget.borderWidth ?? 1.0,
-                          color: this.widget.borderColor ?? Colors.black)) ??
+                          color: this.widget.borderColor ?? black)) ??
                   null,
               focusedBorder: UnderlineInputBorder(
                   borderSide:

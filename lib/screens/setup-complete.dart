@@ -1,15 +1,11 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:haggle_clone/controllers/login-controller.dart';
 import 'package:haggle_clone/utils.dart/margin.dart';
-import 'package:haggle_clone/utils.dart/text-input.dart';
 import 'package:haggle_clone/utils.dart/themes.dart';
 import 'package:haggle_clone/widgets/button.dart';
 
 class SetUpCompleteScreen extends StatelessWidget {
-  final LoginController _loginController = Get.put(LoginController());
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,13 +32,11 @@ class SetUpCompleteScreen extends StatelessWidget {
               YMargin(10),
               Text("Setup Complete",
                   style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold)),
+                      color: white, fontSize: 16, fontWeight: FontWeight.bold)),
               YMargin(20),
               Text("Thank you for setting up your HaggleX account",
                   style: TextStyle(
-                      color: Colors.white,
+                      color: white,
                       fontSize: 10,
                       fontWeight: FontWeight.normal)),
               //  YMargin(15),
