@@ -22,6 +22,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     username = Storage.read('username');
     return Scaffold(
+        //floatingActionButton: Align(
+        //   child: FloatingActionButton(
+        //     child: Image.asset(
+        //       'assets/images/OTC.png',
+        //       height: 90,
+        //       width: 90,
+        //       fit: BoxFit.fill,
+        //     ),
+        //     backgroundColor: Colors.transparent,
+        //     elevation: 0,
+        //     onPressed: () {},
+        //   ),
+        //   alignment: Alignment(0, 1.18),
+        // ),
+        // floatingActionButtonLocation:
+        //     FloatingActionButtonLocation.miniCenterFloat,
         bottomNavigationBar: BottomNavigationBar(
           selectedLabelStyle: TextStyle(color: primaryPurple, fontSize: 10),
           unselectedItemColor: Colors.grey,
